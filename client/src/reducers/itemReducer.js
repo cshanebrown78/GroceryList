@@ -3,10 +3,10 @@ import { GET_ITEMS, ADD_ITEM, DELETE_ITEM } from '../actions/types'
 
 const initialState = {
     items: [
-        { id: uuid(), name: 'Eggs' },
-        { id: uuid(), name: 'Bacon' },
-        { id: uuid(), name: 'Chicken' },
-        { id: uuid(), name: 'Pork' },
+        { id: uuid(), name: 'Eggs', area: 'Dairy', quantity: '12', data: true },
+        { id: uuid(), name: 'Bacon', area: 'Meats', quantity: '2lbs', data: false },
+        { id: uuid(), name: 'Chicken', area: 'Meats', quantity: '1 breast', data: false },
+        { id: uuid(), name: 'Pork', area: 'Meats', quantity: '4 pork chops', data: false },
     ]
 }
 
