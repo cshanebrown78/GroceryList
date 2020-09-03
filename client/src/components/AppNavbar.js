@@ -40,6 +40,11 @@ class AppNavbar extends Component {
                                 <ItemModal />
                             </NavItem>
                             <NavItem>
+                                <NavLink href="/basiclist">
+                                    Basic List
+                                </NavLink>
+                            </NavItem>
+                            <NavItem>
                                 <NavLink href="https://github.com/cshanebrown78/GroceryList">
                                     Github
                                 </NavLink>

@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import AppNavbar from './components/AppNavbar';
-import ShoppingList from './components/ShoppingList'
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import ShoppingList from './pages/ShoppingList'
+import BasicList from './pages/BasicList'
+import NoMatch from './pages/NoMatch'
 import ItemModal from './components/ItemModal';
 import { Container } from 'reactstrap';
 
@@ -12,32 +15,43 @@ import './App.css';
 
 
 class App extends Component {
+
+
   render() {
-    return (
+    return(
       <Provider store={store}>
-        <div className="App">
-          <AppNavbar />
-          <Container>
-            {/* <ItemModal /> */}
-            <ShoppingList />
-          </Container>
-          
-        </div>
+        <AppNavbar />
+        <Router>
+          <Switch>
+            <Route exact path='/' component={ShoppingList} />
+            <Route exact path='/shoppinglist' component={ShoppingList} />
+            <Route exact path='/basiclist' component={BasicList} />
+            <Route component={NoMatch} />
+          </Switch>
+        </Router>
       </Provider>
-      
     )
-  }  
-    ;
+  }
 }
 
 
-// function App() {
-//   return (
-//     <div className="App">
-//       <AppNavbar />
-//       <ShoppingList />
-//     </div>
-//   );
+// class App extends Component {
+//   render() {
+//     return (
+//       <Provider store={store}>
+//         <div className="App">
+//           <AppNavbar />
+//           <Container>
+//             {/* <ItemModal /> */}
+//             <ShoppingList />
+//           </Container>
+          
+//         </div>
+//       </Provider>
+      
+//     )
+//   }  
+//     ;
 // }
 
 export default App;
