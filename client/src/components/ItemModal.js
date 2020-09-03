@@ -98,7 +98,7 @@ class ItemModal extends Component {
                                     <   Input type="textarea" name="quantity" id="quantityText" onChange={this.onChange} />
                                     </Col>
                                 </FormGroup>
-                                <FormGroup row>
+                                {/* <FormGroup row>
                                     <Label for="checkboxRepeatable" sm={10}>Repeatable Weekly?</Label>
                                     <Col sm={{ size: 2 }}>
                                         <FormGroup check>
@@ -114,7 +114,7 @@ class ItemModal extends Component {
                                             </Label>
                                         </FormGroup>
                                     </Col>
-                                </FormGroup>    
+                                </FormGroup>     */}
                             <Button
                                     color="dark"
                                     style={{marginTop: '2rem'}}

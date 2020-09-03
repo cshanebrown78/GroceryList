@@ -23,13 +23,16 @@ class BasicList extends Component {
                 <ListGroup>
                     <h2>Items</h2>
                     <Row>
-                        <Col md={4}>
+                        <Col md={3}>
                             <h5>Purchased</h5>
                         </Col>
-                        <Col md={4}>
+                        <Col md={3}>
                             <h5>Product</h5>
                         </Col>
-                        <Col md={4}>
+                        <Col md={3}>
+                            <h5>Department</h5>
+                        </Col>
+                        <Col md={3}>
                             <h5>Quantity</h5>
                         </Col>
                     </Row>
@@ -39,7 +42,7 @@ class BasicList extends Component {
                             <CSSTransition key={_id} timeout={500} classNames="fade">
                                 <ListGroupItem>
                                     <Row>
-                                        <Col md={4}>
+                                        <Col md={3}>
                                             <Button
                                                 className="remove-btn"
                                                 color="danger"
@@ -49,10 +52,13 @@ class BasicList extends Component {
                                                 &times;
                                             </Button>
                                         </Col>
-                                        <Col md={4}>
+                                        <Col md={3}>
                                             {name}
                                         </Col>
-                                        <Col md={4}>
+                                        <Col md={3}>
+                                            {department}
+                                        </Col>
+                                        <Col md={3}>
                                             {quantity}
                                         </Col>    
                                     </Row>
