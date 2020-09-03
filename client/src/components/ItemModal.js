@@ -12,7 +12,7 @@ import {
  } from 'reactstrap';
 import { connect } from 'react-redux';
 import { addItem } from '../actions/itemActions';
-import uuid from 'react-uuid'
+
 
 class ItemModal extends Component {
     state = {
@@ -20,7 +20,7 @@ class ItemModal extends Component {
         name: '',
         department: '',
         quantity: '',
-        data: 'no'
+        repeat: 'no'
     }
 
     toggle = () => {
@@ -37,11 +37,10 @@ class ItemModal extends Component {
         e.preventDefault();
 
         const newItem = {
-            id: uuid(),
             name: this.state.name,
             department: this.state.select,
             quantity: this.state.quantity,
-            data: this.state.repeatable
+            repeat: this.state.repeatable
         }
 
         // Add item via addItem action
@@ -81,10 +80,10 @@ class ItemModal extends Component {
                                 <Label for="deptSelect">Select</Label>
                                     <Input type="select" name="select" id="deptSelect" onChange={this.onChange}>
                                         <option hidden>Choose One</option>
-                                        <option>Vegetables</option>
+                                        <option>Produce</option>
                                         <option>Cheeses</option>
                                         <option>Meats</option>
-                                        <option>Bread</option>
+                                        <option>Breads</option>
                                         <option>Chips/Snacks</option>
                                         <option>Drinks</option>
                                         <option>Misc</option>

@@ -7,7 +7,15 @@ const ItemSchema = new Schema({
         type: String,
         require: true
     },
-    dept: {
+    department: {
+        type: String,
+        required: true
+    },
+    quantity: {
+        type: String,
+        required: true
+    },
+    repeat: {
         type: String,
         required: true
     },
