@@ -14,6 +14,8 @@ import {
     NavbarText,
     Container
 } from 'reactstrap';
+import ItemModal from '../components/ItemModal';
+
 
 class AppNavbar extends Component {
     state = {
@@ -34,6 +36,9 @@ class AppNavbar extends Component {
                     <NavbarToggler onClick={this.toggle} />
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="ml-auto" navbar>
+                            <NavItem>
+                                <ItemModal />
+                            </NavItem>
                             <NavItem>
                                 <NavLink href="https://github.com/cshanebrown78/GroceryList">
                                     Github
