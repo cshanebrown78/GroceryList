@@ -8,7 +8,8 @@ import {
     FormGroup,
     Label,
     Input,
-    Col
+    Col,
+    NavLink
  } from 'reactstrap';
 import { connect } from 'react-redux';
 import { addItem } from '../actions/itemActions';
@@ -53,11 +54,15 @@ class ItemModal extends Component {
     render() {
         return(
             <div>
-                <Button
+                {/* <Button
                     color="dark"
                     // style={{marginBottom: '2rem'}}
                     onClick={this.toggle}
-                >Add Item</Button>
+                >Add Item</Button> */}
+
+                <NavLink onClick={this.toggle} href="#">
+                    Add Item
+                </NavLink>
 
                 <Modal
                     isOpen={this.state.modal}

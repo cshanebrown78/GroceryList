@@ -4,7 +4,7 @@ const port = process.env.PORT || 3001;
 const path = require('path');
 const config = require('config');
 
-const items = require('./routes/api/items')
+// const items = require('./routes/api/items')
 
 const app = express();
 
@@ -23,6 +23,9 @@ mongoose.connect(process.env.MONGODB_URI || db)
 // mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/GroceryList");
 
 //Use Routes
-app.use('/api/items', items)
+app.use('/api/items', require('./routes/api/items'));
+app.use('/api/users', require('./routes/api/users'));
+app.use('/api/auth', require('./routes/api/auth'));
+
 
 app.listen(port, () => console.log(`Server started on port ${port}`));
