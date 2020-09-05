@@ -19,6 +19,9 @@ const ItemSchema = new Schema({
         type: String,
         required: false
     },
+    uName: {
+        type: String,
+    },
     date: {
         type: Date,
         default: Date.now

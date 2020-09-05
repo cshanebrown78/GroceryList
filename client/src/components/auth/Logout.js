@@ -8,11 +8,11 @@ export class Logout extends Component {
     static propTypes = {
         logout: PropTypes.func.isRequired
     }
-    
+
     render() {
         return (
             <Fragment>
-                <NavLink onClick={this.props.logout} href="#">
+                <NavLink onClick={this.props.logout} href="/">
                     Logout
                 </NavLink>
             </Fragment>

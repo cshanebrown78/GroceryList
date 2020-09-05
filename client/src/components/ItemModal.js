@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useReducer } from 'react';
 import { 
     Button,
     Modal,
@@ -13,15 +13,23 @@ import {
  } from 'reactstrap';
 import { connect } from 'react-redux';
 import { addItem } from '../actions/itemActions';
+import PropTypes from 'prop-types';
 
 
 class ItemModal extends Component {
+
+    static propTypes = {
+        auth: PropTypes.object.isRequired
+    }
+
+    
     state = {
         modal: false,
         name: '',
         department: '',
         quantity: '',
-        repeat: 'no'
+        repeat: 'no',
+        uName: ''
     }
 
     toggle = () => {
@@ -37,18 +45,26 @@ class ItemModal extends Component {
     onSubmit = e => {
         e.preventDefault();
 
+        const { user } = this.props.auth;
+        console.log("username - " + user.userName)
+
         const newItem = {
             name: this.state.name,
             department: this.state.select,
             quantity: this.state.quantity,
-            repeat: this.state.repeatable
+            repeat: this.state.repeatable,
+            uName: user.userName
         }
+
+        console.log('New Item - ' + JSON.stringify(newItem));
 
         // Add item via addItem action
         this.props.addItem(newItem);
 
         // Close Modal
         this.toggle();
+
+        
     }
 
     render() {
@@ -137,7 +153,8 @@ class ItemModal extends Component {
 }
 
 const mapStateToProps = state => ({
-    item: state.item
+    item: state.item,
+    auth: state.auth
 })
 
 export default connect(mapStateToProps, { addItem })(ItemModal);

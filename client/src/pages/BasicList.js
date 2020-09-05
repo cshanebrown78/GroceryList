@@ -6,6 +6,11 @@ import { getItems, deleteItem } from '../actions/itemActions';
 import PropTypes from 'prop-types'
 
 class BasicList extends Component {
+    static propTypes = {
+        getItems: PropTypes.func.isRequired,
+        item: PropTypes.object.isRequired,
+        auth: PropTypes.object.isRequired
+    }
 
     componentDidMount() {
         this.props.getItems();
@@ -17,9 +22,20 @@ class BasicList extends Component {
 
     render() {
         const { items } = this.props.item;
+        const { user} = this.props.auth;
+
+        let current = '';
+
+        if (user) {
+            current = user.userName
+        } else {
+            current = "none"
+        };
+
+        const userItems = items.filter(item => item.uName === current);
         
         return(
-            <Container>
+            <Container className="blist" fixed="top">
                 <ListGroup>
                     <h2>Items</h2>
                     <Row>
@@ -38,7 +54,7 @@ class BasicList extends Component {
                     </Row>
                     <TransitionGroup className="shopping-list">
                         {/* {items.map(({ _id, name, department, quantity, repeat }) => ( */}
-                        {items.map(({ _id, name, department, quantity, repeat }) => (        
+                        {userItems.map(({ _id, name, department, quantity, repeat }) => (        
                             <CSSTransition key={_id} timeout={500} classNames="fade">
                                 <ListGroupItem>
                                     <Row>
@@ -73,13 +89,11 @@ class BasicList extends Component {
     }
 }
 
-BasicList.propTypes = {
-    getItems: PropTypes.func.isRequired,
-    item: PropTypes.object.isRequired
-}
+
 
 const mapStateToProps = (state) => ({
-    item: state.item
+    item: state.item,
+    auth: state.auth
 });
 
 export default connect(

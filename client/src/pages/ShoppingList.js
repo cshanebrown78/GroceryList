@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { Component, useState, useReducer } from 'react';
 import { Container, ListGroup, ListGroupItem, Button, Row, Col } from 'reactstrap';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 // import uuid from 'react-uuid';
@@ -8,10 +8,16 @@ import DropDown from '../components/DropDown';
 import PropTypes from 'prop-types'
 
 class ShoppingList extends Component {
+    static propTypes = {
+        getItems: PropTypes.func.isRequired,
+        item: PropTypes.object.isRequired,
+        auth: PropTypes.object.isRequired
+    }
 
     componentDidMount() {
         this.props.getItems();
     }
+
 
     onDeleteClick = (id) => {
         this.props.deleteItem(id);
@@ -19,22 +25,60 @@ class ShoppingList extends Component {
 
     render() {
         const { items } = this.props.item;
+        const { user } = this.props.auth;
+
+        let current = '';
+        
+        // console.log("userName - " + current)
+        if (user) {
+            current = user.userName
+        } else {
+            current = "none"
+        };
+
+        const userItems = items.filter(item => item.uName === current);
+
         // console.log("Items " + JSON.stringify(items));
-        const produce = items.filter(item => item.department === "Produce");
-        const cheeses = items.filter(item => item.department === "Cheeses");
-        const meats = items.filter(item => item.department === "Meats");
-        const breads = items.filter(item => item.department === "Breads");
-        const chips_snacks = items.filter(item => item.department === "Chips/Snacks");
-        const drinks = items.filter(item => item.department === "Drinks");
-        const misc = items.filter(item => item.department === "Misc");
-        const supplies = items.filter(item => item.department === "Supplies");
-        const dairy = items.filter(item => item.department === "Dairy");
-        const frozen = items.filter(item => item.department === "Frozen");
+        // console.log("Items work " + items.item.department[Produce]);
+        const produce = userItems.filter(item => item.department === "Produce");
+        const cheeses = userItems.filter(item => item.department === "Cheeses");
+        const meats = userItems.filter(item => item.department === "Meats");
+        const breads = userItems.filter(item => item.department === "Breads");
+        const chips_snacks = userItems.filter(item => item.department === "Chips/Snacks");
+        const drinks = userItems.filter(item => item.department === "Drinks");
+        const misc = userItems.filter(item => item.department === "Misc");
+        const supplies = userItems.filter(item => item.department === "Supplies");
+        const dairy = userItems.filter(item => item.department === "Dairy");
+        const frozen = userItems.filter(item => item.department === "Frozen");
         // console.log("produce: " + JSON.stringify(products));
+
+        // const { user } = this.props.auth;
+        // console.log("User - " + JSON.stringify(user))
+        // console.log("Username - " + user.auth.userName)
+        
+        // const currentUser = user.uName
+        // const { items_user } = this.props.item;
+        // console.log("item_uName" + items_user.item.uName);
+        // console.log("Items - " + JSON.stringify(items_user))
+        // // const items = items_user.filter(item => item.uName === currentUser)
+
+        // // console.log("Items " + JSON.stringify(items));
+        // const produce = items.filter(item => item.department === "Produce");
+        // const cheeses = items.filter(item => item.department === "Cheeses");
+        // const meats = items.filter(item => item.department === "Meats");
+        // const breads = items.filter(item => item.department === "Breads");
+        // const chips_snacks = items.filter(item => item.department === "Chips/Snacks");
+        // const drinks = items.filter(item => item.department === "Drinks");
+        // const misc = items.filter(item => item.department === "Misc");
+        // const supplies = items.filter(item => item.department === "Supplies");
+        // const dairy = items.filter(item => item.department === "Dairy");
+        // const frozen = items.filter(item => item.department === "Frozen");
+        // console.log("produce: " + JSON.stringify(products));
+
         return(
-            <Container>
+            <Container className="list">
                 <ListGroup>
-                    <h2>Produce</h2>
+                    <h2  className="mt-35">Produce</h2>
                     <Row>
                         <Col md={4}>
                             <h5>Purchased</h5>
@@ -450,13 +494,11 @@ class ShoppingList extends Component {
     }
 }
 
-ShoppingList.propTypes = {
-    getItems: PropTypes.func.isRequired,
-    item: PropTypes.object.isRequired
-}
+
 
 const mapStateToProps = (state) => ({
-    item: state.item
+    item: state.item,
+    auth: state.auth
 });
 
 export default connect(

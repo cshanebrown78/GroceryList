@@ -40,6 +40,19 @@ class AppNavbar extends Component {
         const authLinks = (
             <Fragment>
                 <NavItem>
+                    <NavLink href="/shoppinglist">
+                        Main List
+                    </NavLink>
+                </NavItem>
+                <NavItem>
+                    <ItemModal />
+                </NavItem>
+                <NavItem>
+                    <NavLink href="/basiclist">
+                        Basic List
+                    </NavLink>
+                </NavItem>
+                <NavItem>
                     <Logout />
                 </NavItem>
             </Fragment>
@@ -49,20 +62,12 @@ class AppNavbar extends Component {
 
         return (
              <div>
-            <Navbar color="dark" dark expand="sm" className="mb-5">
+            <Navbar color="dark" dark expand="sm" className="mb-5" fixed="top">
                 <Container>
                     <NavbarBrand href="/">GroceryList</NavbarBrand>
                     <NavbarToggler onClick={this.toggle} />
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="ml-auto" navbar>
-                            <NavItem>
-                                <ItemModal />
-                            </NavItem>
-                            <NavItem>
-                                <NavLink href="/basiclist">
-                                    Basic List
-                                </NavLink>
-                            </NavItem>
                             { isAuthenticated ? authLinks : ''}
                         </Nav>
                     </Collapse>

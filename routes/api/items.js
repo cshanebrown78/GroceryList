@@ -16,6 +16,12 @@ router.get('/', auth, (req, res) => {
         .then(items => res.json(items))
 });
 
+// router.get('/', auth, (req, res) => {
+//     Item.find( { "uName": req.params.id } )
+//         .sort({ date: -1 })
+//         .then(items => res.json(items))
+// });
+
 // @route POST api/items
 // @desc Create An Item
 // @access Private
@@ -25,7 +31,8 @@ router.post('/', auth, (req, res) => {
         name: req.body.name,
         department: req.body.department,
         quantity: req.body.quantity,
-        repeat: req.body.repeat
+        repeat: req.body.repeat,
+        uName: req.body.uName
     });
 
     newItem.save().then(item => res.json(item));
