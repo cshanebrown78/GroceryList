@@ -56,7 +56,7 @@ class ItemModal extends Component {
             uName: user.userName
         }
 
-        console.log('New Item - ' + JSON.stringify(newItem));
+        // console.log('New Item - ' + JSON.stringify(newItem));
 
         // Add item via addItem action
         this.props.addItem(newItem);

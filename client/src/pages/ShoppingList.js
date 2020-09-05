@@ -50,30 +50,56 @@ class ShoppingList extends Component {
         const supplies = userItems.filter(item => item.department === "Supplies");
         const dairy = userItems.filter(item => item.department === "Dairy");
         const frozen = userItems.filter(item => item.department === "Frozen");
-        // console.log("produce: " + JSON.stringify(products));
 
-        // const { user } = this.props.auth;
-        // console.log("User - " + JSON.stringify(user))
-        // console.log("Username - " + user.auth.userName)
-        
-        // const currentUser = user.uName
-        // const { items_user } = this.props.item;
-        // console.log("item_uName" + items_user.item.uName);
-        // console.log("Items - " + JSON.stringify(items_user))
-        // // const items = items_user.filter(item => item.uName === currentUser)
+        console.log("Cheeses object - " + JSON.stringify(cheeses))
+        // console.log("Cheeses - " + cheeses[0].name);
+        const isCheese = cheeses;
+        console.log(isCheese)
 
-        // // console.log("Items " + JSON.stringify(items));
-        // const produce = items.filter(item => item.department === "Produce");
-        // const cheeses = items.filter(item => item.department === "Cheeses");
-        // const meats = items.filter(item => item.department === "Meats");
-        // const breads = items.filter(item => item.department === "Breads");
-        // const chips_snacks = items.filter(item => item.department === "Chips/Snacks");
-        // const drinks = items.filter(item => item.department === "Drinks");
-        // const misc = items.filter(item => item.department === "Misc");
-        // const supplies = items.filter(item => item.department === "Supplies");
-        // const dairy = items.filter(item => item.department === "Dairy");
-        // const frozen = items.filter(item => item.department === "Frozen");
-        // console.log("produce: " + JSON.stringify(products));
+        const cheeseLink = (
+            <ListGroup>
+                    <br></br>
+                    <h2>Cheeses</h2>
+                    <Row>
+                        <Col md={4}>
+                            <h5>Purchased</h5>
+                        </Col>
+                        <Col md={4}>
+                            <h5>Product</h5>
+                        </Col>
+                        <Col md={4}>
+                            <h5>Quantity</h5>
+                        </Col>
+                    </Row>
+                    <TransitionGroup className="shopping-list">
+                        {cheeses.map(({ _id, name, department, quantity, repeat }) => (        
+                            <CSSTransition key={_id} timeout={500} classNames="fade">
+                                <ListGroupItem>
+                                    <Row>
+                                        <Col md={4}>
+                                            <Button
+                                                className="remove-btn"
+                                                color="danger"
+                                                size="sm"
+                                                onClick={this.onDeleteClick.bind(this, _id)}
+                                            >
+                                                &times;
+                                            </Button>
+                                        </Col>
+                                        <Col md={4}>
+                                            {name}
+                                        </Col>
+                                        <Col md={4}>
+                                            {quantity}
+                                        </Col>    
+                                    </Row>
+                                    
+                                </ListGroupItem>
+                            </CSSTransition>
+                        ))}
+                    </TransitionGroup>
+                </ListGroup>
+        )
 
         return(
             <Container className="list">
@@ -118,7 +144,8 @@ class ShoppingList extends Component {
                         ))}
                     </TransitionGroup>
                 </ListGroup>
-                <ListGroup>
+                { cheeses.length === 0  ? '' : cheeseLink}
+                {/* <ListGroup>
                     <br></br>
                     <h2>Cheeses</h2>
                     <Row>
@@ -159,7 +186,7 @@ class ShoppingList extends Component {
                             </CSSTransition>
                         ))}
                     </TransitionGroup>
-                </ListGroup>
+                </ListGroup> */}
                 <ListGroup>
                     <br></br>
                     <h2>Meats</h2>
