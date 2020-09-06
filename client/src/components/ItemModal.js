@@ -28,7 +28,7 @@ class ItemModal extends Component {
         name: '',
         department: '',
         quantity: '',
-        repeat: 'no',
+        repeatable: 'no',
         uName: ''
     }
 
@@ -52,7 +52,7 @@ class ItemModal extends Component {
             name: this.state.name,
             department: this.state.select,
             quantity: this.state.quantity,
-            repeat: this.state.repeatable,
+            repeatable: this.state.repeatable,
             uName: user.userName
         }
 
