@@ -51,10 +51,49 @@ class ShoppingList extends Component {
         const dairy = userItems.filter(item => item.department === "Dairy");
         const frozen = userItems.filter(item => item.department === "Frozen");
 
-        console.log("Cheeses object - " + JSON.stringify(cheeses))
-        // console.log("Cheeses - " + cheeses[0].name);
-        const isCheese = cheeses;
-        console.log(isCheese)
+            const produceLink = (
+                <ListGroup>
+                    <h2  className="mt-35">Produce</h2>
+                    <Row>
+                        <Col md={4}>
+                            <h5>Purchased</h5>
+                        </Col>
+                        <Col md={4}>
+                            <h5>Product</h5>
+                        </Col>
+                        <Col md={4}>
+                            <h5>Quantity</h5>
+                        </Col>
+                    </Row>
+                    <TransitionGroup className="shopping-list">
+                        {/* {items.map(({ _id, name, department, quantity, repeat }) => ( */}
+                        {produce.map(({ _id, name, department, quantity, repeat }) => (        
+                            <CSSTransition key={_id} timeout={500} classNames="fade">
+                                <ListGroupItem>
+                                    <Row>
+                                        <Col md={4}>
+                                            <Button
+                                                className="remove-btn"
+                                                color="danger"
+                                                size="sm"
+                                                onClick={this.onDeleteClick.bind(this, _id)}
+                                            >
+                                                &times;
+                                            </Button>
+                                        </Col>
+                                        <Col md={4}>
+                                            {name}
+                                        </Col>
+                                        <Col md={4}>
+                                            {quantity}
+                                        </Col>    
+                                    </Row>
+                                </ListGroupItem>
+                            </CSSTransition>
+                        ))}
+                    </TransitionGroup>
+                </ListGroup>
+            )
 
         const cheeseLink = (
             <ListGroup>
@@ -99,137 +138,55 @@ class ShoppingList extends Component {
                         ))}
                     </TransitionGroup>
                 </ListGroup>
-        )
+        );
 
-        return(
-            <Container className="list">
-                <ListGroup>
-                    <h2  className="mt-35">Produce</h2>
-                    <Row>
-                        <Col md={4}>
-                            <h5>Purchased</h5>
-                        </Col>
-                        <Col md={4}>
-                            <h5>Product</h5>
-                        </Col>
-                        <Col md={4}>
-                            <h5>Quantity</h5>
-                        </Col>
-                    </Row>
-                    <TransitionGroup className="shopping-list">
-                        {/* {items.map(({ _id, name, department, quantity, repeat }) => ( */}
-                        {produce.map(({ _id, name, department, quantity, repeat }) => (        
-                            <CSSTransition key={_id} timeout={500} classNames="fade">
-                                <ListGroupItem>
-                                    <Row>
-                                        <Col md={4}>
-                                            <Button
-                                                className="remove-btn"
-                                                color="danger"
-                                                size="sm"
-                                                onClick={this.onDeleteClick.bind(this, _id)}
-                                            >
-                                                &times;
-                                            </Button>
-                                        </Col>
-                                        <Col md={4}>
-                                            {name}
-                                        </Col>
-                                        <Col md={4}>
-                                            {quantity}
-                                        </Col>    
-                                    </Row>
-                                </ListGroupItem>
-                            </CSSTransition>
-                        ))}
-                    </TransitionGroup>
-                </ListGroup>
-                { cheeses.length === 0  ? '' : cheeseLink}
-                {/* <ListGroup>
-                    <br></br>
-                    <h2>Cheeses</h2>
-                    <Row>
-                        <Col md={4}>
-                            <h5>Purchased</h5>
-                        </Col>
-                        <Col md={4}>
-                            <h5>Product</h5>
-                        </Col>
-                        <Col md={4}>
-                            <h5>Quantity</h5>
-                        </Col>
-                    </Row>
-                    <TransitionGroup className="shopping-list">
-                        {cheeses.map(({ _id, name, department, quantity, repeat }) => (        
-                            <CSSTransition key={_id} timeout={500} classNames="fade">
-                                <ListGroupItem>
-                                    <Row>
-                                        <Col md={4}>
-                                            <Button
-                                                className="remove-btn"
-                                                color="danger"
-                                                size="sm"
-                                                onClick={this.onDeleteClick.bind(this, _id)}
-                                            >
-                                                &times;
-                                            </Button>
-                                        </Col>
-                                        <Col md={4}>
-                                            {name}
-                                        </Col>
-                                        <Col md={4}>
-                                            {quantity}
-                                        </Col>    
-                                    </Row>
-                                    
-                                </ListGroupItem>
-                            </CSSTransition>
-                        ))}
-                    </TransitionGroup>
-                </ListGroup> */}
-                <ListGroup>
-                    <br></br>
-                    <h2>Meats</h2>
-                    <Row>
-                        <Col md={4}>
-                            <h5>Purchased</h5>
-                        </Col>
-                        <Col md={4}>
-                            <h5>Product</h5>
-                        </Col>
-                        <Col md={4}>
-                            <h5>Quantity</h5>
-                        </Col>
-                    </Row>
-                    <TransitionGroup className="shopping-list">
-                        {meats.map(({ _id, name, department, quantity, repeat }) => (        
-                            <CSSTransition key={_id} timeout={500} classNames="fade">
-                                <ListGroupItem>
-                                    <Row>
-                                        <Col md={4}>
-                                            <Button
-                                                className="remove-btn"
-                                                color="danger"
-                                                size="sm"
-                                                onClick={this.onDeleteClick.bind(this, _id)}
-                                            >
-                                                &times;
-                                            </Button>
-                                        </Col>
-                                        <Col md={4}>
-                                            {name}
-                                        </Col>
-                                        <Col md={4}>
-                                            {quantity}
-                                        </Col>    
-                                    </Row>
-                                    
-                                </ListGroupItem>
-                            </CSSTransition>
-                        ))}
-                    </TransitionGroup>
-                </ListGroup>
-                <ListGroup>
+        const meatsLink = (
+            <ListGroup>
+                <br></br>
+                <h2>Meats</h2>
+                <Row>
+                    <Col md={4}>
+                        <h5>Purchased</h5>
+                    </Col>
+                    <Col md={4}>
+                        <h5>Product</h5>
+                    </Col>
+                    <Col md={4}>
+                        <h5>Quantity</h5>
+                    </Col>
+                </Row>
+                <TransitionGroup className="shopping-list">
+                    {meats.map(({ _id, name, department, quantity, repeat }) => (        
+                        <CSSTransition key={_id} timeout={500} classNames="fade">
+                            <ListGroupItem>
+                                <Row>
+                                    <Col md={4}>
+                                        <Button
+                                            className="remove-btn"
+                                            color="danger"
+                                            size="sm"
+                                            onClick={this.onDeleteClick.bind(this, _id)}
+                                        >
+                                            &times;
+                                        </Button>
+                                    </Col>
+                                    <Col md={4}>
+                                        {name}
+                                    </Col>
+                                    <Col md={4}>
+                                        {quantity}
+                                    </Col>    
+                                </Row>
+                                
+                            </ListGroupItem>
+                        </CSSTransition>
+                    ))}
+                </TransitionGroup>
+            </ListGroup>
+        );
+
+        const breadsLink = (
+            <ListGroup>
                     <br></br>
                     <h2>Breads</h2>
                     <Row>
@@ -270,7 +227,10 @@ class ShoppingList extends Component {
                         ))}
                     </TransitionGroup>
                 </ListGroup>
-                <ListGroup>
+        );
+
+        const chips_snacksLink = (
+            <ListGroup>
                     <br></br>
                     <h2>Chips/Snacks</h2>
                     <Row>
@@ -311,48 +271,54 @@ class ShoppingList extends Component {
                         ))}
                     </TransitionGroup>
                 </ListGroup>
-                <ListGroup>
-                    <br></br>
-                    <h2>Drinks</h2>
-                    <Row>
-                        <Col md={4}>
-                            <h5>Purchased</h5>
-                        </Col>
-                        <Col md={4}>
-                            <h5>Product</h5>
-                        </Col>
-                        <Col md={4}>
-                            <h5>Quantity</h5>
-                        </Col>
-                    </Row>
-                    <TransitionGroup className="shopping-list">
-                        {drinks.map(({ _id, name, department, quantity, repeat }) => (        
-                            <CSSTransition key={_id} timeout={500} classNames="fade">
-                                <ListGroupItem>
-                                    <Row>
-                                        <Col md={4}>
-                                            <Button
-                                                className="remove-btn"
-                                                color="danger"
-                                                size="sm"
-                                                onClick={this.onDeleteClick.bind(this, _id)}
-                                            >
-                                                &times;
-                                            </Button>
-                                        </Col>
-                                        <Col md={4}>
-                                            {name}
-                                        </Col>
-                                        <Col md={4}>
-                                            {quantity}
-                                        </Col>    
-                                    </Row>
-                                </ListGroupItem>
-                            </CSSTransition>
-                        ))}
-                    </TransitionGroup>
-                </ListGroup>
-                <ListGroup>
+        );
+
+        const drinksLink = (
+            <ListGroup>
+                                <br></br>
+                                <h2>Drinks</h2>
+                                <Row>
+                                    <Col md={4}>
+                                        <h5>Purchased</h5>
+                                    </Col>
+                                    <Col md={4}>
+                                        <h5>Product</h5>
+                                    </Col>
+                                    <Col md={4}>
+                                        <h5>Quantity</h5>
+                                    </Col>
+                                </Row>
+                                <TransitionGroup className="shopping-list">
+                                    {drinks.map(({ _id, name, department, quantity, repeat }) => (        
+                                        <CSSTransition key={_id} timeout={500} classNames="fade">
+                                            <ListGroupItem>
+                                                <Row>
+                                                    <Col md={4}>
+                                                        <Button
+                                                            className="remove-btn"
+                                                            color="danger"
+                                                            size="sm"
+                                                            onClick={this.onDeleteClick.bind(this, _id)}
+                                                        >
+                                                            &times;
+                                                        </Button>
+                                                    </Col>
+                                                    <Col md={4}>
+                                                        {name}
+                                                    </Col>
+                                                    <Col md={4}>
+                                                        {quantity}
+                                                    </Col>    
+                                                </Row>
+                                            </ListGroupItem>
+                                        </CSSTransition>
+                                    ))}
+                                </TransitionGroup>
+                            </ListGroup>
+        );
+
+        const miscLink = (
+            <ListGroup>
                     <br></br>
                     <h2>Misc</h2>
                     <Row>
@@ -393,7 +359,10 @@ class ShoppingList extends Component {
                         ))}
                     </TransitionGroup>
                 </ListGroup>
-                <ListGroup>
+        );
+
+        const suppliesLink = (
+            <ListGroup>
                     <br></br>
                     <h2>Supplies</h2>
                     <Row>
@@ -434,48 +403,54 @@ class ShoppingList extends Component {
                         ))}
                     </TransitionGroup>
                 </ListGroup>
-                <ListGroup>
-                    <br></br>
-                    <h2>Dairy</h2>
-                    <Row>
-                        <Col md={4}>
-                            <h5>Purchased</h5>
-                        </Col>
-                        <Col md={4}>
-                            <h5>Product</h5>
-                        </Col>
-                        <Col md={4}>
-                            <h5>Quantity</h5>
-                        </Col>
-                    </Row>
-                    <TransitionGroup className="shopping-list">
-                        {dairy.map(({ _id, name, department, quantity, repeat }) => (        
-                            <CSSTransition key={_id} timeout={500} classNames="fade">
-                                <ListGroupItem>
-                                    <Row>
-                                        <Col md={4}>
-                                            <Button
-                                                className="remove-btn"
-                                                color="danger"
-                                                size="sm"
-                                                onClick={this.onDeleteClick.bind(this, _id)}
-                                            >
-                                                &times;
-                                            </Button>
-                                        </Col>
-                                        <Col md={4}>
-                                            {name}
-                                        </Col>
-                                        <Col md={4}>
-                                            {quantity}
-                                        </Col>    
-                                    </Row>
-                                </ListGroupItem>
-                            </CSSTransition>
-                        ))}
-                    </TransitionGroup>
-                </ListGroup>
-                <ListGroup>
+        );
+
+        const dairyLink = (
+            <ListGroup>
+                                <br></br>
+                                <h2>Dairy</h2>
+                                <Row>
+                                    <Col md={4}>
+                                        <h5>Purchased</h5>
+                                    </Col>
+                                    <Col md={4}>
+                                        <h5>Product</h5>
+                                    </Col>
+                                    <Col md={4}>
+                                        <h5>Quantity</h5>
+                                    </Col>
+                                </Row>
+                                <TransitionGroup className="shopping-list">
+                                    {dairy.map(({ _id, name, department, quantity, repeat }) => (        
+                                        <CSSTransition key={_id} timeout={500} classNames="fade">
+                                            <ListGroupItem>
+                                                <Row>
+                                                    <Col md={4}>
+                                                        <Button
+                                                            className="remove-btn"
+                                                            color="danger"
+                                                            size="sm"
+                                                            onClick={this.onDeleteClick.bind(this, _id)}
+                                                        >
+                                                            &times;
+                                                        </Button>
+                                                    </Col>
+                                                    <Col md={4}>
+                                                        {name}
+                                                    </Col>
+                                                    <Col md={4}>
+                                                        {quantity}
+                                                    </Col>    
+                                                </Row>
+                                            </ListGroupItem>
+                                        </CSSTransition>
+                                    ))}
+                                </TransitionGroup>
+                            </ListGroup>
+        );
+
+        const frozenLink = (
+            <ListGroup>
                     <br></br>
                     <h2>Frozen</h2>
                     <Row>
@@ -516,6 +491,27 @@ class ShoppingList extends Component {
                         ))}
                     </TransitionGroup>
                 </ListGroup>
+        );
+
+        return(
+            <Container className="list">
+                { produce.length === 0  ? '' : produceLink}
+                { cheeses.length === 0  ? '' : cheeseLink}
+                { meats.length === 0  ? '' : meatsLink}
+                
+                { breads.length === 0  ? '' : breadsLink}
+                
+                { chips_snacks.length === 0  ? '' : chips_snacksLink }
+                
+                { drinks.length === 0  ? '' : drinksLink }
+                
+                { misc.length === 0  ? '' : miscLink }
+                
+                { supplies.length === 0  ? '' : suppliesLink } 
+                
+                { dairy.length === 0  ? '' : dairyLink }
+                
+                { frozen.length === 0  ? '' : frozenLink }
             </Container>
         );
     }
