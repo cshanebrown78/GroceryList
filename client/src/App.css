@@ -28,7 +28,8 @@ h2 {
 }
 
 .login {
-    text-align: center
+    text-align: center;
+    padding: 8rem 0;
 }
 
 .list {
