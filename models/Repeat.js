@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 //Create Schema
-const ItemSchema = new Schema({
+const RepeatSchema = new Schema({
     name: {
         type: String,
         require: true
@@ -28,4 +28,4 @@ const ItemSchema = new Schema({
     }
 });
 
-module.exports = Item = mongoose.model('item', ItemSchema);
+module.exports = Repeat = mongoose.model('repeat', RepeatSchema);
