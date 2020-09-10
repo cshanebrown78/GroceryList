@@ -13,6 +13,7 @@ import {
  } from 'reactstrap';
 import { connect } from 'react-redux';
 import { addItem } from '../actions/itemActions';
+import { addRepeat } from '../actions/repeatActions';
 import PropTypes from 'prop-types';
 
 
@@ -56,10 +57,17 @@ class ItemModal extends Component {
             uName: user.userName
         }
 
-        // console.log('New Item - ' + JSON.stringify(newItem));
+        console.log('New Item - ' + newItem.repeatable);
 
         // Add item via addItem action
-        this.props.addItem(newItem);
+
+        if(newItem.repeatable === "yes") {
+            this.props.addItem(newItem);
+            this.props.addRepeat(newItem);
+        } else {
+            this.props.addItem(newItem);
+        }
+        
 
         // Close Modal
         this.toggle();
@@ -70,12 +78,6 @@ class ItemModal extends Component {
     render() {
         return(
             <div>
-                {/* <Button
-                    color="dark"
-                    // style={{marginBottom: '2rem'}}
-                    onClick={this.toggle}
-                >Add Item</Button> */}
-
                 <NavLink onClick={this.toggle} href="#">
                     Add Item
                 </NavLink>
@@ -119,7 +121,7 @@ class ItemModal extends Component {
                                     <   Input type="textarea" name="quantity" id="quantityText" onChange={this.onChange} />
                                     </Col>
                                 </FormGroup>
-                                {/* <FormGroup row>
+                                <FormGroup row>
                                     <Label for="checkboxRepeatable" sm={10}>Repeatable Weekly?</Label>
                                     <Col sm={{ size: 2 }}>
                                         <FormGroup check>
@@ -135,7 +137,7 @@ class ItemModal extends Component {
                                             </Label>
                                         </FormGroup>
                                     </Col>
-                                </FormGroup>     */}
+                                </FormGroup>    
                             <Button
                                     color="dark"
                                     style={{marginTop: '2rem'}}
@@ -154,7 +156,8 @@ class ItemModal extends Component {
 
 const mapStateToProps = state => ({
     item: state.item,
+    repeat: state.repeat,
     auth: state.auth
 })
 
-export default connect(mapStateToProps, { addItem })(ItemModal);
+export default connect(mapStateToProps, { addItem, addRepeat })(ItemModal);

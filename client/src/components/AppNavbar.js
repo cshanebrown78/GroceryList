@@ -53,6 +53,11 @@ class AppNavbar extends Component {
                     </NavLink>
                 </NavItem>
                 <NavItem>
+                    <NavLink href="/repeatablelist">
+                        Repeatables List
+                    </NavLink>
+                </NavItem>
+                <NavItem>
                     <Logout />
                 </NavItem>
             </Fragment>

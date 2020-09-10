@@ -15,6 +15,7 @@ import './App.css';
 import MainPage from './pages/Index';
 import ShoppingList from './pages/ShoppingList';
 import BasicList from './pages/BasicList';
+import RepeatableList from './pages/RepeatableList';
 import NoMatch from './pages/NoMatch';
 
 class App extends Component {
@@ -32,6 +33,7 @@ class App extends Component {
             <Route exact path='/' component={MainPage} />
             <Route exact path='/shoppinglist' component={ShoppingList} />
             <Route exact path='/basiclist' component={BasicList} />
+            <Route exact path='/repeatablelist' component={RepeatableList} />
             <Route component={NoMatch} />
           </Switch>
         </Router>
