@@ -13,6 +13,7 @@ import { connect } from "react-redux";
 import { addItem } from "../actions/itemActions";
 import { getRepeats, deleteRepeat } from "../actions/repeatActions";
 import PropTypes from "prop-types";
+// import user from "../../../models/user";
 
 class RepeatableList extends Component {
   static propTypes = {
@@ -29,6 +30,21 @@ class RepeatableList extends Component {
   onDeleteClick = (id) => {
     this.props.deleteRepeat(id);
   };
+
+  onAddClick = (name, department, quantity) => {
+    //   console.log("name = " + name)
+      const { user } = this.props.auth;
+
+      const repeatItem = {
+          name: name,
+          department: department,
+          quantity: quantity,
+          uName: user.userName
+      }
+
+      console.log("repeatItem = " + JSON.stringify(repeatItem))
+      this.props.addItem(repeatItem);
+  }
 
   render() {
     const { items } = this.props.item;
@@ -65,14 +81,17 @@ class RepeatableList extends Component {
       <ListGroup>
         <h2 className="mt-35">Produce</h2>
         <Row>
-          <Col md={4}>
-            <h5>Purchased</h5>
+          <Col md={3}>
+            <h5>Delete</h5>
           </Col>
-          <Col md={4}>
+          <Col md={3}>
             <h5>Product</h5>
           </Col>
-          <Col md={4}>
+          <Col md={3}>
             <h5>Quantity</h5>
+          </Col>
+          <Col md={3}>
+            <h5>Add to List</h5>
           </Col>
         </Row>
         <TransitionGroup className="shopping-list">
@@ -81,18 +100,28 @@ class RepeatableList extends Component {
             <CSSTransition key={_id} timeout={500} classNames="fade">
               <ListGroupItem>
                 <Row>
-                  <Col md={4}>
-                    <Button
-                      className="remove-btn"
-                      color="danger"
-                      size="sm"
-                      onClick={this.onDeleteClick.bind(this, _id)}
-                    >
-                      &times;
-                    </Button>
-                  </Col>
-                  <Col md={4}>{name}</Col>
-                  <Col md={4}>{quantity}</Col>
+                    <Col md={3}>
+                        <Button
+                        className="remove-btn"
+                        color="danger"
+                        size="sm"
+                        onClick={this.onDeleteClick.bind(this, _id)}
+                        >
+                        &times;
+                        </Button>
+                    </Col>
+                    <Col md={3}>{name}</Col>
+                    <Col md={3}>{quantity}</Col>
+                    <Col md={3}>
+                        <Button
+                        className="remove-btn"
+                        color="success"
+                        size="sm"
+                        onClick={this.onAddClick.bind(this, name, department, quantity)}
+                        >
+                        +
+                        </Button>
+                    </Col>
                 </Row>
               </ListGroupItem>
             </CSSTransition>
@@ -106,22 +135,25 @@ class RepeatableList extends Component {
         <br></br>
         <h2>Cheeses</h2>
         <Row>
-          <Col md={4}>
-            <h5>Purchased</h5>
-          </Col>
-          <Col md={4}>
-            <h5>Product</h5>
-          </Col>
-          <Col md={4}>
-            <h5>Quantity</h5>
-          </Col>
+            <Col md={3}>
+                <h5>Delete</h5>
+            </Col>
+            <Col md={3}>
+                <h5>Product</h5>
+            </Col>
+            <Col md={3}>
+                <h5>Quantity</h5>
+            </Col>
+            <Col md={3}>
+                <h5>Add to List</h5>
+            </Col>
         </Row>
         <TransitionGroup className="shopping-list">
           {cheeses.map(({ _id, name, department, quantity, repeat }) => (
             <CSSTransition key={_id} timeout={500} classNames="fade">
               <ListGroupItem>
                 <Row>
-                  <Col md={4}>
+                  <Col md={3}>
                     <Button
                       className="remove-btn"
                       color="danger"
@@ -131,8 +163,18 @@ class RepeatableList extends Component {
                       &times;
                     </Button>
                   </Col>
-                  <Col md={4}>{name}</Col>
-                  <Col md={4}>{quantity}</Col>
+                  <Col md={3}>{name}</Col>
+                  <Col md={3}>{quantity}</Col>
+                  <Col md={3}>
+                    <Button
+                      className="remove-btn"
+                      color="success"
+                      size="sm"
+                      onClick={this.onAddClick.bind(this, name, department, quantity)}
+                    >
+                      +
+                    </Button>
+                  </Col>
                 </Row>
               </ListGroupItem>
             </CSSTransition>
@@ -146,33 +188,46 @@ class RepeatableList extends Component {
         <br></br>
         <h2>Meats</h2>
         <Row>
-          <Col md={4}>
-            <h5>Purchased</h5>
-          </Col>
-          <Col md={4}>
-            <h5>Product</h5>
-          </Col>
-          <Col md={4}>
-            <h5>Quantity</h5>
-          </Col>
+            <Col md={3}>
+                <h5>Delete</h5>
+            </Col>
+            <Col md={3}>
+                <h5>Product</h5>
+            </Col>
+            <Col md={3}>
+                <h5>Quantity</h5>
+            </Col>
+            <Col md={3}>
+                <h5>Add to List</h5>
+            </Col>
         </Row>
         <TransitionGroup className="shopping-list">
           {meats.map(({ _id, name, department, quantity, repeat }) => (
             <CSSTransition key={_id} timeout={500} classNames="fade">
               <ListGroupItem>
                 <Row>
-                  <Col md={4}>
-                    <Button
-                      className="remove-btn"
-                      color="danger"
-                      size="sm"
-                      onClick={this.onDeleteClick.bind(this, _id)}
-                    >
-                      &times;
-                    </Button>
-                  </Col>
-                  <Col md={4}>{name}</Col>
-                  <Col md={4}>{quantity}</Col>
+                    <Col md={3}>
+                        <Button
+                        className="remove-btn"
+                        color="danger"
+                        size="sm"
+                        onClick={this.onDeleteClick.bind(this, _id)}
+                        >
+                        &times;
+                        </Button>
+                    </Col>
+                    <Col md={3}>{name}</Col>
+                    <Col md={3}>{quantity}</Col>
+                    <Col md={3}>
+                        <Button
+                        className="remove-btn"
+                        color="success"
+                        size="sm"
+                        onClick={this.onAddClick.bind(this, name, department, quantity)}
+                        >
+                        +
+                        </Button>
+                    </Col>
                 </Row>
               </ListGroupItem>
             </CSSTransition>
@@ -186,33 +241,46 @@ class RepeatableList extends Component {
         <br></br>
         <h2>Breads</h2>
         <Row>
-          <Col md={4}>
-            <h5>Purchased</h5>
-          </Col>
-          <Col md={4}>
-            <h5>Product</h5>
-          </Col>
-          <Col md={4}>
-            <h5>Quantity</h5>
-          </Col>
+            <Col md={3}>
+                <h5>Delete</h5>
+            </Col>
+            <Col md={3}>
+                <h5>Product</h5>
+            </Col>
+            <Col md={3}>
+                <h5>Quantity</h5>
+            </Col>
+            <Col md={3}>
+                <h5>Add to List</h5>
+            </Col>
         </Row>
         <TransitionGroup className="shopping-list">
           {breads.map(({ _id, name, department, quantity, repeat }) => (
             <CSSTransition key={_id} timeout={500} classNames="fade">
               <ListGroupItem>
                 <Row>
-                  <Col md={4}>
-                    <Button
-                      className="remove-btn"
-                      color="danger"
-                      size="sm"
-                      onClick={this.onDeleteClick.bind(this, _id)}
-                    >
-                      &times;
-                    </Button>
-                  </Col>
-                  <Col md={4}>{name}</Col>
-                  <Col md={4}>{quantity}</Col>
+                    <Col md={3}>
+                        <Button
+                        className="remove-btn"
+                        color="danger"
+                        size="sm"
+                        onClick={this.onDeleteClick.bind(this, _id)}
+                        >
+                        &times;
+                        </Button>
+                    </Col>
+                    <Col md={3}>{name}</Col>
+                    <Col md={3}>{quantity}</Col>
+                    <Col md={3}>
+                        <Button
+                        className="remove-btn"
+                        color="success"
+                        size="sm"
+                        onClick={this.onAddClick.bind(this, name, department, quantity)}
+                        >
+                        +
+                        </Button>
+                    </Col>
                 </Row>
               </ListGroupItem>
             </CSSTransition>
@@ -226,33 +294,46 @@ class RepeatableList extends Component {
         <br></br>
         <h2>Chips/Snacks</h2>
         <Row>
-          <Col md={4}>
-            <h5>Purchased</h5>
-          </Col>
-          <Col md={4}>
-            <h5>Product</h5>
-          </Col>
-          <Col md={4}>
-            <h5>Quantity</h5>
-          </Col>
+            <Col md={3}>
+                <h5>Delete</h5>
+            </Col>
+            <Col md={3}>
+                <h5>Product</h5>
+            </Col>
+            <Col md={3}>
+                <h5>Quantity</h5>
+            </Col>
+            <Col md={3}>
+                <h5>Add to List</h5>
+            </Col>
         </Row>
         <TransitionGroup className="shopping-list">
           {chips_snacks.map(({ _id, name, department, quantity, repeat }) => (
             <CSSTransition key={_id} timeout={500} classNames="fade">
               <ListGroupItem>
                 <Row>
-                  <Col md={4}>
-                    <Button
-                      className="remove-btn"
-                      color="danger"
-                      size="sm"
-                      onClick={this.onDeleteClick.bind(this, _id)}
-                    >
-                      &times;
-                    </Button>
-                  </Col>
-                  <Col md={4}>{name}</Col>
-                  <Col md={4}>{quantity}</Col>
+                    <Col md={3}>
+                        <Button
+                        className="remove-btn"
+                        color="danger"
+                        size="sm"
+                        onClick={this.onDeleteClick.bind(this, _id)}
+                        >
+                        &times;
+                        </Button>
+                    </Col>
+                    <Col md={3}>{name}</Col>
+                    <Col md={3}>{quantity}</Col>
+                    <Col md={3}>
+                        <Button
+                        className="remove-btn"
+                        color="success"
+                        size="sm"
+                        onClick={this.onAddClick.bind(this, name, department, quantity)}
+                        >
+                        +
+                        </Button>
+                    </Col>
                 </Row>
               </ListGroupItem>
             </CSSTransition>
@@ -266,33 +347,46 @@ class RepeatableList extends Component {
         <br></br>
         <h2>Drinks</h2>
         <Row>
-          <Col md={4}>
-            <h5>Purchased</h5>
-          </Col>
-          <Col md={4}>
-            <h5>Product</h5>
-          </Col>
-          <Col md={4}>
-            <h5>Quantity</h5>
-          </Col>
+            <Col md={3}>
+                <h5>Delete</h5>
+            </Col>
+            <Col md={3}>
+                <h5>Product</h5>
+            </Col>
+            <Col md={3}>
+                <h5>Quantity</h5>
+            </Col>
+            <Col md={3}>
+                <h5>Add to List</h5>
+            </Col>
         </Row>
         <TransitionGroup className="shopping-list">
           {drinks.map(({ _id, name, department, quantity, repeat }) => (
             <CSSTransition key={_id} timeout={500} classNames="fade">
               <ListGroupItem>
                 <Row>
-                  <Col md={4}>
-                    <Button
-                      className="remove-btn"
-                      color="danger"
-                      size="sm"
-                      onClick={this.onDeleteClick.bind(this, _id)}
-                    >
-                      &times;
-                    </Button>
-                  </Col>
-                  <Col md={4}>{name}</Col>
-                  <Col md={4}>{quantity}</Col>
+                    <Col md={3}>
+                        <Button
+                        className="remove-btn"
+                        color="danger"
+                        size="sm"
+                        onClick={this.onDeleteClick.bind(this, _id)}
+                        >
+                        &times;
+                        </Button>
+                    </Col>
+                    <Col md={3}>{name}</Col>
+                    <Col md={3}>{quantity}</Col>
+                    <Col md={3}>
+                        <Button
+                        className="remove-btn"
+                        color="success"
+                        size="sm"
+                        onClick={this.onAddClick.bind(this, name, department, quantity)}
+                        >
+                        +
+                        </Button>
+                    </Col>
                 </Row>
               </ListGroupItem>
             </CSSTransition>
@@ -306,33 +400,46 @@ class RepeatableList extends Component {
         <br></br>
         <h2>Misc</h2>
         <Row>
-          <Col md={4}>
-            <h5>Purchased</h5>
-          </Col>
-          <Col md={4}>
-            <h5>Product</h5>
-          </Col>
-          <Col md={4}>
-            <h5>Quantity</h5>
-          </Col>
+            <Col md={3}>
+                <h5>Delete</h5>
+            </Col>
+            <Col md={3}>
+                <h5>Product</h5>
+            </Col>
+            <Col md={3}>
+                <h5>Quantity</h5>
+            </Col>
+            <Col md={3}>
+                <h5>Add to List</h5>
+            </Col>
         </Row>
         <TransitionGroup className="shopping-list">
           {misc.map(({ _id, name, department, quantity, repeat }) => (
             <CSSTransition key={_id} timeout={500} classNames="fade">
               <ListGroupItem>
                 <Row>
-                  <Col md={4}>
-                    <Button
-                      className="remove-btn"
-                      color="danger"
-                      size="sm"
-                      onClick={this.onDeleteClick.bind(this, _id)}
-                    >
-                      &times;
-                    </Button>
-                  </Col>
-                  <Col md={4}>{name}</Col>
-                  <Col md={4}>{quantity}</Col>
+                    <Col md={3}>
+                        <Button
+                        className="remove-btn"
+                        color="danger"
+                        size="sm"
+                        onClick={this.onDeleteClick.bind(this, _id)}
+                        >
+                        &times;
+                        </Button>
+                    </Col>
+                    <Col md={3}>{name}</Col>
+                    <Col md={3}>{quantity}</Col>
+                    <Col md={3}>
+                        <Button
+                        className="remove-btn"
+                        color="success"
+                        size="sm"
+                        onClick={this.onAddClick.bind(this, name, department, quantity)}
+                        >
+                        +
+                        </Button>
+                    </Col>
                 </Row>
               </ListGroupItem>
             </CSSTransition>
@@ -346,33 +453,46 @@ class RepeatableList extends Component {
         <br></br>
         <h2>Supplies</h2>
         <Row>
-          <Col md={4}>
-            <h5>Purchased</h5>
-          </Col>
-          <Col md={4}>
-            <h5>Product</h5>
-          </Col>
-          <Col md={4}>
-            <h5>Quantity</h5>
-          </Col>
+            <Col md={3}>
+                <h5>Delete</h5>
+            </Col>
+            <Col md={3}>
+                <h5>Product</h5>
+            </Col>
+            <Col md={3}>
+                <h5>Quantity</h5>
+            </Col>
+            <Col md={3}>
+                <h5>Add to List</h5>
+            </Col>
         </Row>
         <TransitionGroup className="shopping-list">
           {supplies.map(({ _id, name, department, quantity, repeat }) => (
             <CSSTransition key={_id} timeout={500} classNames="fade">
               <ListGroupItem>
                 <Row>
-                  <Col md={4}>
-                    <Button
-                      className="remove-btn"
-                      color="danger"
-                      size="sm"
-                      onClick={this.onDeleteClick.bind(this, _id)}
-                    >
-                      &times;
-                    </Button>
-                  </Col>
-                  <Col md={4}>{name}</Col>
-                  <Col md={4}>{quantity}</Col>
+                    <Col md={3}>
+                        <Button
+                        className="remove-btn"
+                        color="danger"
+                        size="sm"
+                        onClick={this.onDeleteClick.bind(this, _id)}
+                        >
+                        &times;
+                        </Button>
+                    </Col>
+                    <Col md={3}>{name}</Col>
+                    <Col md={3}>{quantity}</Col>
+                    <Col md={3}>
+                        <Button
+                        className="remove-btn"
+                        color="success"
+                        size="sm"
+                        onClick={this.onAddClick.bind(this, name, department, quantity)}
+                        >
+                        +
+                        </Button>
+                    </Col>
                 </Row>
               </ListGroupItem>
             </CSSTransition>
@@ -386,33 +506,46 @@ class RepeatableList extends Component {
         <br></br>
         <h2>Dairy</h2>
         <Row>
-          <Col md={4}>
-            <h5>Purchased</h5>
-          </Col>
-          <Col md={4}>
-            <h5>Product</h5>
-          </Col>
-          <Col md={4}>
-            <h5>Quantity</h5>
-          </Col>
+            <Col md={3}>
+                <h5>Delete</h5>
+            </Col>
+            <Col md={3}>
+                <h5>Product</h5>
+            </Col>
+            <Col md={3}>
+                <h5>Quantity</h5>
+            </Col>
+            <Col md={3}>
+                <h5>Add to List</h5>
+            </Col>
         </Row>
         <TransitionGroup className="shopping-list">
           {dairy.map(({ _id, name, department, quantity, repeat }) => (
             <CSSTransition key={_id} timeout={500} classNames="fade">
               <ListGroupItem>
                 <Row>
-                  <Col md={4}>
-                    <Button
-                      className="remove-btn"
-                      color="danger"
-                      size="sm"
-                      onClick={this.onDeleteClick.bind(this, _id)}
-                    >
-                      &times;
-                    </Button>
-                  </Col>
-                  <Col md={4}>{name}</Col>
-                  <Col md={4}>{quantity}</Col>
+                    <Col md={3}>
+                        <Button
+                        className="remove-btn"
+                        color="danger"
+                        size="sm"
+                        onClick={this.onDeleteClick.bind(this, _id)}
+                        >
+                        &times;
+                        </Button>
+                    </Col>
+                    <Col md={3}>{name}</Col>
+                    <Col md={3}>{quantity}</Col>
+                    <Col md={3}>
+                        <Button
+                        className="remove-btn"
+                        color="success"
+                        size="sm"
+                        onClick={this.onAddClick.bind(this, name, department, quantity)}
+                        >
+                        +
+                        </Button>
+                    </Col>
                 </Row>
               </ListGroupItem>
             </CSSTransition>
@@ -426,33 +559,46 @@ class RepeatableList extends Component {
         <br></br>
         <h2>Frozen</h2>
         <Row>
-          <Col md={4}>
-            <h5>Purchased</h5>
-          </Col>
-          <Col md={4}>
-            <h5>Product</h5>
-          </Col>
-          <Col md={4}>
-            <h5>Quantity</h5>
-          </Col>
+            <Col md={3}>
+                <h5>Delete</h5>
+            </Col>
+            <Col md={3}>
+                <h5>Product</h5>
+            </Col>
+            <Col md={3}>
+                <h5>Quantity</h5>
+            </Col>
+            <Col md={3}>
+                <h5>Add to List</h5>
+            </Col>
         </Row>
         <TransitionGroup className="shopping-list">
           {frozen.map(({ _id, name, department, quantity, repeat }) => (
             <CSSTransition key={_id} timeout={500} classNames="fade">
               <ListGroupItem>
                 <Row>
-                  <Col md={4}>
-                    <Button
-                      className="remove-btn"
-                      color="danger"
-                      size="sm"
-                      onClick={this.onDeleteClick.bind(this, _id)}
-                    >
-                      &times;
-                    </Button>
-                  </Col>
-                  <Col md={4}>{name}</Col>
-                  <Col md={4}>{quantity}</Col>
+                    <Col md={3}>
+                        <Button
+                        className="remove-btn"
+                        color="danger"
+                        size="sm"
+                        onClick={this.onDeleteClick.bind(this, _id)}
+                        >
+                        &times;
+                        </Button>
+                    </Col>
+                    <Col md={3}>{name}</Col>
+                    <Col md={3}>{quantity}</Col>
+                    <Col md={3}>
+                        <Button
+                        className="remove-btn"
+                        color="success"
+                        size="sm"
+                        onClick={this.onAddClick.bind(this, name, department, quantity)}
+                        >
+                        +
+                        </Button>
+                    </Col>
                 </Row>
               </ListGroupItem>
             </CSSTransition>

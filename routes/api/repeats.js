@@ -25,7 +25,7 @@ router.post('/', auth, (req, res) => {
         name: req.body.name,
         department: req.body.department,
         quantity: req.body.quantity,
-        repeatable: req.body.repeat,
+        // repeatable: req.body.repeatable,
         uName: req.body.uName
     });
 
