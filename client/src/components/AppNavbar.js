@@ -38,9 +38,9 @@ class AppNavbar extends Component {
         const { isAuthenticated, user } = this.props.auth;
 
         const authLinks = (
-            <Fragment>
+            <Fragment className="navigation">
                 <NavItem>
-                    <NavLink href="/shoppinglist">
+                    <NavLink className="navigation" href="/shoppinglist">
                         Main List
                     </NavLink>
                 </NavItem>
@@ -48,12 +48,12 @@ class AppNavbar extends Component {
                     <ItemModal />
                 </NavItem>
                 <NavItem>
-                    <NavLink href="/basiclist">
+                    <NavLink className="navigation" href="/basiclist">
                         Basic List
                     </NavLink>
                 </NavItem>
                 <NavItem>
-                    <NavLink href="/repeatablelist">
+                    <NavLink className="navigation" href="/repeatablelist">
                         Repeatables List
                     </NavLink>
                 </NavItem>
@@ -66,19 +66,20 @@ class AppNavbar extends Component {
 
 
         return (
-             <div>
-            <Navbar color="dark" dark expand="sm" className="mb-5" fixed="top">
-                <Container>
-                    <NavbarBrand href="/">GroceryList</NavbarBrand>
-                    <NavbarToggler onClick={this.toggle} />
-                    <Collapse isOpen={this.state.isOpen} navbar>
-                        <Nav className="ml-auto" navbar>
-                            { isAuthenticated ? authLinks : ''}
-                        </Nav>
-                    </Collapse>
-                </Container>
-            </Navbar>
-        </div>
+            <div>
+                {/* <Navbar color="dark" dark expand="sm" className="mb-5" fixed="top"> */}
+                <Navbar className="mb-5 navigation" expand='sm' fixed="top">    
+                    <Container>
+                        <NavbarBrand className="navigation" href="/">GroceryList</NavbarBrand>
+                        <NavbarToggler onClick={this.toggle} />
+                        <Collapse isOpen={this.state.isOpen} navbar>
+                            <Nav className="ml-auto" navbar>
+                                { isAuthenticated ? authLinks : ''}
+                            </Nav>
+                        </Collapse>
+                    </Container>
+                </Navbar>
+            </div>
         );
        
     }

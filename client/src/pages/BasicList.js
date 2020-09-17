@@ -36,7 +36,7 @@ class BasicList extends Component {
         
         return(
             <Container className="blist" fixed="top">
-                <ListGroup>
+                <ListGroup className="dairy">
                     <h2>Items</h2>
                     <Row>
                         <Col md={3}>
@@ -56,7 +56,7 @@ class BasicList extends Component {
                         {/* {items.map(({ _id, name, department, quantity, repeat }) => ( */}
                         {userItems.map(({ _id, name, department, quantity, repeat }) => (        
                             <CSSTransition key={_id} timeout={500} classNames="fade">
-                                <ListGroupItem>
+                                <ListGroupItem className="list-text">
                                     <Row>
                                         <Col md={3}>
                                             <Button

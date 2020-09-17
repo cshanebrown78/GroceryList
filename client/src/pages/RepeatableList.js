@@ -78,7 +78,7 @@ class RepeatableList extends Component {
     const frozen = userRepeats.filter((repeat) => repeat.department === "Frozen");
 
     const produceLink = (
-      <ListGroup>
+      <ListGroup className="produce">
         <h2 className="mt-35">Produce</h2>
         <Row>
           <Col md={3}>
@@ -98,7 +98,7 @@ class RepeatableList extends Component {
           {/* {items.map(({ _id, name, department, quantity, repeat }) => ( */}
           {produce.map(({ _id, name, department, quantity, repeat }) => (
             <CSSTransition key={_id} timeout={500} classNames="fade">
-              <ListGroupItem>
+              <ListGroupItem className="list-text">
                 <Row>
                     <Col md={3}>
                         <Button
@@ -131,8 +131,7 @@ class RepeatableList extends Component {
     );
 
     const cheeseLink = (
-      <ListGroup>
-        <br></br>
+      <ListGroup className="cheese">
         <h2>Cheeses</h2>
         <Row>
             <Col md={3}>
@@ -151,7 +150,7 @@ class RepeatableList extends Component {
         <TransitionGroup className="shopping-list">
           {cheeses.map(({ _id, name, department, quantity, repeat }) => (
             <CSSTransition key={_id} timeout={500} classNames="fade">
-              <ListGroupItem>
+              <ListGroupItem className="list-text">
                 <Row>
                   <Col md={3}>
                     <Button
@@ -184,8 +183,7 @@ class RepeatableList extends Component {
     );
 
     const meatsLink = (
-      <ListGroup>
-        <br></br>
+      <ListGroup className="meat">
         <h2>Meats</h2>
         <Row>
             <Col md={3}>
@@ -204,7 +202,7 @@ class RepeatableList extends Component {
         <TransitionGroup className="shopping-list">
           {meats.map(({ _id, name, department, quantity, repeat }) => (
             <CSSTransition key={_id} timeout={500} classNames="fade">
-              <ListGroupItem>
+              <ListGroupItem className="list-text">
                 <Row>
                     <Col md={3}>
                         <Button
@@ -237,8 +235,7 @@ class RepeatableList extends Component {
     );
 
     const breadsLink = (
-      <ListGroup>
-        <br></br>
+      <ListGroup className="bread">
         <h2>Breads</h2>
         <Row>
             <Col md={3}>
@@ -257,7 +254,7 @@ class RepeatableList extends Component {
         <TransitionGroup className="shopping-list">
           {breads.map(({ _id, name, department, quantity, repeat }) => (
             <CSSTransition key={_id} timeout={500} classNames="fade">
-              <ListGroupItem>
+              <ListGroupItem className="list-text">
                 <Row>
                     <Col md={3}>
                         <Button
@@ -290,8 +287,7 @@ class RepeatableList extends Component {
     );
 
     const chips_snacksLink = (
-      <ListGroup>
-        <br></br>
+      <ListGroup className="snack">
         <h2>Chips/Snacks</h2>
         <Row>
             <Col md={3}>
@@ -310,7 +306,7 @@ class RepeatableList extends Component {
         <TransitionGroup className="shopping-list">
           {chips_snacks.map(({ _id, name, department, quantity, repeat }) => (
             <CSSTransition key={_id} timeout={500} classNames="fade">
-              <ListGroupItem>
+              <ListGroupItem className="list-text">
                 <Row>
                     <Col md={3}>
                         <Button
@@ -343,8 +339,7 @@ class RepeatableList extends Component {
     );
 
     const drinksLink = (
-      <ListGroup>
-        <br></br>
+      <ListGroup className="drink">
         <h2>Drinks</h2>
         <Row>
             <Col md={3}>
@@ -363,7 +358,7 @@ class RepeatableList extends Component {
         <TransitionGroup className="shopping-list">
           {drinks.map(({ _id, name, department, quantity, repeat }) => (
             <CSSTransition key={_id} timeout={500} classNames="fade">
-              <ListGroupItem>
+              <ListGroupItem className="list-text">
                 <Row>
                     <Col md={3}>
                         <Button
@@ -396,8 +391,7 @@ class RepeatableList extends Component {
     );
 
     const miscLink = (
-      <ListGroup>
-        <br></br>
+      <ListGroup className="misc">
         <h2>Misc</h2>
         <Row>
             <Col md={3}>
@@ -416,7 +410,7 @@ class RepeatableList extends Component {
         <TransitionGroup className="shopping-list">
           {misc.map(({ _id, name, department, quantity, repeat }) => (
             <CSSTransition key={_id} timeout={500} classNames="fade">
-              <ListGroupItem>
+              <ListGroupItem className="list-text">
                 <Row>
                     <Col md={3}>
                         <Button
@@ -449,8 +443,7 @@ class RepeatableList extends Component {
     );
 
     const suppliesLink = (
-      <ListGroup>
-        <br></br>
+      <ListGroup className="supplies">
         <h2>Supplies</h2>
         <Row>
             <Col md={3}>
@@ -469,7 +462,7 @@ class RepeatableList extends Component {
         <TransitionGroup className="shopping-list">
           {supplies.map(({ _id, name, department, quantity, repeat }) => (
             <CSSTransition key={_id} timeout={500} classNames="fade">
-              <ListGroupItem>
+              <ListGroupItem className="list-text">
                 <Row>
                     <Col md={3}>
                         <Button
@@ -502,8 +495,7 @@ class RepeatableList extends Component {
     );
 
     const dairyLink = (
-      <ListGroup>
-        <br></br>
+      <ListGroup className="dairy">
         <h2>Dairy</h2>
         <Row>
             <Col md={3}>
@@ -522,7 +514,7 @@ class RepeatableList extends Component {
         <TransitionGroup className="shopping-list">
           {dairy.map(({ _id, name, department, quantity, repeat }) => (
             <CSSTransition key={_id} timeout={500} classNames="fade">
-              <ListGroupItem>
+              <ListGroupItem className="list-text">
                 <Row>
                     <Col md={3}>
                         <Button
@@ -555,8 +547,7 @@ class RepeatableList extends Component {
     );
 
     const frozenLink = (
-      <ListGroup>
-        <br></br>
+      <ListGroup className="frozen">
         <h2>Frozen</h2>
         <Row>
             <Col md={3}>
@@ -575,7 +566,7 @@ class RepeatableList extends Component {
         <TransitionGroup className="shopping-list">
           {frozen.map(({ _id, name, department, quantity, repeat }) => (
             <CSSTransition key={_id} timeout={500} classNames="fade">
-              <ListGroupItem>
+              <ListGroupItem className="list-text">
                 <Row>
                     <Col md={3}>
                         <Button

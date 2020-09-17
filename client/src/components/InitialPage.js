@@ -18,8 +18,14 @@ class InitialPage extends Component {
 
         const guestLinks = (
             <Container className='login'>
-                <h1>Welcome To Your Shopping List</h1>
-                <p>Please Sign In or Register To Continue</p>
+                <div className='blur'>
+                    <div className='content-blur'>
+                        <h1>Welcome To Your Shopping List</h1>
+                        <h3>Please Sign In or Register To Continue</h3>
+                    </div>
+                </div>
+                
+                
                 <br />
                 <br />
                 <LoginModal buttonLabel='Login' style={{ marginTop: 100 }} />

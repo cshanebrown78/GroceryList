@@ -88,7 +88,8 @@ class LoginModal extends Component {
         return(
             <div>
                 <Button
-                    color="dark"
+                    // color="dark"
+                    className="navigation"
                     style={{marginBottom: '2rem'}}
                     onClick={this.toggle}
                 >
@@ -124,7 +125,8 @@ class LoginModal extends Component {
                                 />
                             </FormGroup>
                             <Button
-                                    color="dark"
+                                    // color="dark"
+                                    className="navigation"
                                     style={{marginTop: '2rem'}}
                                     block
                             >

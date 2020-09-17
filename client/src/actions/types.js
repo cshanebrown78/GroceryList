@@ -16,3 +16,4 @@ export const GET_REPEATS = 'GET_REPEATS';
 export const ADD_REPEAT = 'ADD_REPEAT';
 export const DELETE_REPEAT = 'DELETE_REPEAT';
 export const REPEATS_LOADING = 'REPEATS_LOADING';
+export const UPDATE_ITEM = 'UPDATE_ITEM'

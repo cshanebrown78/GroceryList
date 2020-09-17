@@ -20,7 +20,7 @@ import PropTypes from 'prop-types';
 class ItemModal extends Component {
 
     static propTypes = {
-        auth: PropTypes.object.isRequired
+        auth: PropTypes.object.isRequired,
     }
 
     
@@ -47,7 +47,7 @@ class ItemModal extends Component {
         e.preventDefault();
 
         const { user } = this.props.auth;
-        console.log("username - " + user.userName)
+        // console.log("username - " + user.userName)
 
         const newItem = {
             name: this.state.name,
@@ -57,7 +57,7 @@ class ItemModal extends Component {
             uName: user.userName
         }
 
-        console.log('New Item - ' + newItem.repeatable);
+        // console.log('New Item - ' + newItem.repeatable);
 
         // Add item via addItem action
 
@@ -78,7 +78,7 @@ class ItemModal extends Component {
     render() {
         return(
             <div>
-                <NavLink onClick={this.toggle} href="#">
+                <NavLink onClick={this.toggle} className="navigation" href="#">
                     Add Item
                 </NavLink>
 
@@ -118,7 +118,7 @@ class ItemModal extends Component {
                                 <FormGroup row>
                                     <Label for="quantityText" sm={2}>Quantity Needed</Label>
                                     <Col sm={10}>
-                                    <   Input type="textarea" name="quantity" id="quantityText" onChange={this.onChange} />
+                                        <Input type="textarea" name="quantity" id="quantityText" onChange={this.onChange} />
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
