@@ -37,10 +37,6 @@ class ShoppingList extends Component {
     this.props.deleteItem(id);
   };
 
-  // onChange = (e, _id) => {
-  //   this.setState({ [e.target.name]: e.target.value });
-  // }
-
   state = {
       id: '',
       quantity: '',
@@ -53,32 +49,35 @@ class ShoppingList extends Component {
       });
     }
 
-      onChange = (e) => {
-      this.setState({ [e.target.name]: e.target.value });
+  onChange = (e) => {
+    this.setState({ [e.target.name]: e.target.value });
   }
 
   onSubmit = e => {
       e.preventDefault();
 
       const { user } = this.props.auth;
-      // console.log("this - " + user.userName)
 
       const updatedQty = {
           id: this.state.id,
           quantity: this.state.quantity
-          // uName: user.userName
       }
 
-      console.log('updatedQty - ' + JSON.stringify(updatedQty));
-
       // Add item via addItem action
-          this.props.updateItem(updatedQty);
-
+      this.props.updateItem(updatedQty);
+      
       // Close Modal
       this.toggle();
 
-      
+      // this.display()
   }
+
+  display = () => {
+    // this.props.getItems()
+    window.location.reload()
+  }
+
+
 
   onUpdateClick = (id) => {
 
@@ -88,7 +87,7 @@ class ShoppingList extends Component {
     
     this.toggle();
 
-    console.log("id = " + id)
+    // console.log("id = " + id)
 
 
   }
@@ -141,7 +140,7 @@ class ShoppingList extends Component {
               <h5>Quantity</h5>
             </Col>
             <Col md={3}>
-              <h5>Update Qty</h5>
+              <h5>Update Quantity</h5>
             </Col>
           </Row>
         <TransitionGroup className="shopping-list">

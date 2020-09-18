@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 
 const initialState = {
     items: [],
+    updates: [],
     loading: false
 }
 
@@ -33,7 +34,7 @@ export default function(state = initialState, action) {
         case UPDATE_ITEM:
             return{
                 ...state,
-                items: state.items.filter(item => item._id !==action.payload)
+                updates: [action.payload, ...state.items],
             }
         default:
             return state;    

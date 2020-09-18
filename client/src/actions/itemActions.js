@@ -40,17 +40,18 @@ export const deleteItem = (id) => (dispatch, getState) => {
         .catch(err => dispatch(returnErrors(err.response.data, err.response.status)))
 };
 
-export const updateItem = (updateQty) => (dispatch, getState) => {
+export const updateItem = (updateQty) => dispatch => {
+    // dispatch(setItemsLoading());
     axios
-        .put(`/api/items/${updateQty.id}`, tokenConfig(getState))
+        .put(`/api/items/${updateQty.id}`, updateQty)
         .then(res =>
             dispatch({
                 type: UPDATE_ITEM,
-                payload: res.data
+                payload: {quantity: updateQty.quantity}
             })
         )
         .catch(err => dispatch(returnErrors(err.response.data, err.response.status)))
-};
+}
 
 
 export const setItemsLoading = () => {

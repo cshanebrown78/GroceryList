@@ -16,17 +16,12 @@ router.get('/', auth, (req, res) => {
         .then(items => res.json(items))
 });
 
-// router.get('/', auth, (req, res) => {
-//     Item.find( { "uName": req.params.id } )
-//         .sort({ date: -1 })
-//         .then(items => res.json(items))
-// });
-
 // @route POST api/items
 // @desc Create An Item
 // @access Private
 
 router.post('/', auth, (req, res) => {
+    console.log("req.body - " + JSON.stringify(req.body))
     const newItem = new Item({
         name: req.body.name,
         department: req.body.department,
@@ -48,10 +43,14 @@ router.delete('/:id', auth, (req, res) => {
         .catch(err => res.status(404).json({ success: false }))
 });
 
-router.put('/:id', auth, (req, res) => {
-    Item.findByIdAndUpdate(req.params.id, {quantity: req.body})
+// @route Put api/items/:id
+// @desc Update An Item Quantity
+// @access Private
+
+router.put('/:id', (req, res) => {
+    Item.findOneAndUpdate({ _id: req.params.id }, req.body, {new: true})
         .then(item => res.json(item))
-        .catch(err => res.status(404).json({ success: false }))
+        .catch(err => res.status(422).json({ success: false }))
 })
 
 
