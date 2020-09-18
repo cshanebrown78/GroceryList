@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import AppNavbar from './components/AppNavbar';
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
-import ItemModal from './components/ItemModal';
-import { Container } from 'reactstrap';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { loadUser } from './actions/authActions'
 
 import { Provider } from 'react-redux';

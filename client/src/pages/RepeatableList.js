@@ -1,4 +1,4 @@
-import React, { Component, useState, useReducer } from "react";
+import React, { Component } from "react";
 import {
   Container,
   ListGroup,
@@ -8,12 +8,10 @@ import {
   Col,
 } from "reactstrap";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
-// import uuid from 'react-uuid';
 import { connect } from "react-redux";
 import { addItem } from "../actions/itemActions";
 import { getRepeats, deleteRepeat } from "../actions/repeatActions";
 import PropTypes from "prop-types";
-// import user from "../../../models/user";
 
 class RepeatableList extends Component {
   static propTypes = {
@@ -47,7 +45,6 @@ class RepeatableList extends Component {
   }
 
   render() {
-    const { items } = this.props.item;
     const { repeats } = this.props.repeat;
     const { user } = this.props.auth;
 

@@ -1,4 +1,4 @@
-import React, { Component, useReducer } from 'react';
+import React, { Component } from 'react';
 import { 
     Button,
     Modal,
@@ -47,7 +47,6 @@ class ItemModal extends Component {
         e.preventDefault();
 
         const { user } = this.props.auth;
-        // console.log("username - " + user.userName)
 
         const newItem = {
             name: this.state.name,
@@ -56,10 +55,6 @@ class ItemModal extends Component {
             repeatable: this.state.repeatable,
             uName: user.userName
         }
-
-        // console.log('New Item - ' + newItem.repeatable);
-
-        // Add item via addItem action
 
         if(newItem.repeatable === "yes") {
             this.props.addItem(newItem);

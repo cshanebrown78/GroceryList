@@ -1,5 +1,4 @@
-import { GET_REPEATS, ADD_REPEAT, DELETE_REPEAT, REPEATS_LOADING, ADD_ITEM } from '../actions/types'
-import { bindActionCreators } from 'redux';
+import { GET_REPEATS, ADD_REPEAT, DELETE_REPEAT, REPEATS_LOADING } from '../actions/types'
 
 const initialState = {
     repeats: [],

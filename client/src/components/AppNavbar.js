@@ -7,11 +7,6 @@ import {
     Nav,
     NavItem,
     NavLink,
-    // UncontrolledDropdown,
-    // DropdownToggle,
-    // DropdownMenu,
-    // DropdownItem,
-    // NavbarText,
     Container
 } from 'reactstrap';
 import { connect } from 'react-redux';
@@ -35,7 +30,7 @@ class AppNavbar extends Component {
         });
     }
     render() {
-        const { isAuthenticated, user } = this.props.auth;
+        const { isAuthenticated } = this.props.auth;
 
         const authLinks = (
             <Fragment className="navigation">

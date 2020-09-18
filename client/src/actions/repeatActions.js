@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_REPEATS, ADD_REPEAT, DELETE_REPEAT, REPEATS_LOADING, ADD_ITEM } from './types';
+import { GET_REPEATS, ADD_REPEAT, DELETE_REPEAT, REPEATS_LOADING } from './types';
 import { tokenConfig } from './authActions';
 import { returnErrors} from './errorActions';
 

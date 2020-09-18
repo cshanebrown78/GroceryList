@@ -1,6 +1,4 @@
-import uuid from 'react-uuid';
 import { GET_ITEMS, ADD_ITEM, DELETE_ITEM, ITEMS_LOADING, UPDATE_ITEM } from '../actions/types'
-import { bindActionCreators } from 'redux';
 
 const initialState = {
     items: [],

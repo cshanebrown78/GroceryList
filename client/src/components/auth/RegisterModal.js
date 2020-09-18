@@ -8,9 +8,6 @@ import {
     FormGroup,
     Label,
     Input,
-    Col,
-    NavLink,
-    Nav,
     Alert
  } from 'reactstrap';
 import { connect } from 'react-redux';

@@ -1,4 +1,4 @@
-import React, { Component, useState, useReducer } from "react";
+import React, { Component } from "react";
 import {
   Container,
   ListGroup,
@@ -12,7 +12,7 @@ import {
   Input,
   Modal,
   ModalHeader,
-  ModalBody
+  ModalBody,
 } from "reactstrap";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 // import uuid from 'react-uuid';
@@ -20,7 +20,6 @@ import { connect } from "react-redux";
 import { getItems, deleteItem, updateItem } from "../actions/itemActions";
 // import UpdateModal from "../components/UpdateModal";
 import PropTypes from "prop-types";
-
 
 class ShoppingList extends Component {
   static propTypes = {
@@ -38,59 +37,53 @@ class ShoppingList extends Component {
   };
 
   state = {
-      id: '',
-      quantity: '',
-      modal: false
-    }
+    id: "",
+    quantity: "",
+    modal: false,
+  };
 
-    toggle = () => {
-      this.setState({
-          modal: !this.state.modal
-      });
-    }
+  toggle = () => {
+    this.setState({
+      modal: !this.state.modal,
+    });
+  };
 
   onChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
-  }
+  };
 
-  onSubmit = e => {
-      e.preventDefault();
+  onSubmit = (e) => {
+    e.preventDefault();
 
-      const { user } = this.props.auth;
+    const updatedQty = {
+      id: this.state.id,
+      quantity: this.state.quantity,
+    };
 
-      const updatedQty = {
-          id: this.state.id,
-          quantity: this.state.quantity
-      }
+    // Add item via addItem action
+    this.props.updateItem(updatedQty);
 
-      // Add item via addItem action
-      this.props.updateItem(updatedQty);
-      
-      // Close Modal
-      this.toggle();
+    // Close Modal
+    this.toggle();
 
-      // this.display()
-  }
+    this.display();
+  };
 
   display = () => {
-    // this.props.getItems()
-    window.location.reload()
-  }
-
-
+    setTimeout(function () {
+      window.location.reload();
+    }, 1000);
+  };
 
   onUpdateClick = (id) => {
-
     this.setState({
-      id: id
+      id: id,
     });
-    
+
     this.toggle();
 
     // console.log("id = " + id)
-
-
-  }
+  };
 
   render() {
     const { items } = this.props.item;
@@ -124,25 +117,25 @@ class ShoppingList extends Component {
 
     const produceLink = (
       <ListGroup className="produce">
-          <Row>
-            <Col md={12}>
-              <h2 className="mt-35 produce">Produce</h2>
-            </Col>
-          </Row>
-          <Row>
-            <Col md={3}>
-              <h5>Purchased</h5>
-            </Col>
-            <Col md={3}>
-              <h5>Product</h5>
-            </Col>
-            <Col md={3}>
-              <h5>Quantity</h5>
-            </Col>
-            <Col md={3}>
-              <h5>Update Quantity</h5>
-            </Col>
-          </Row>
+        <Row>
+          <Col md={12}>
+            <h2 className="mt-35 produce">Produce</h2>
+          </Col>
+        </Row>
+        <Row>
+          <Col md={3}>
+            <h5>Purchased</h5>
+          </Col>
+          <Col md={3}>
+            <h5>Product</h5>
+          </Col>
+          <Col md={3}>
+            <h5>Quantity</h5>
+          </Col>
+          <Col md={3}>
+            <h5>Update Quantity</h5>
+          </Col>
+        </Row>
         <TransitionGroup className="shopping-list">
           {/* {items.map(({ _id, name, department, quantity, repeat }) => ( */}
           {produce.map(({ _id, name, department, quantity, repeat }) => (
@@ -183,14 +176,17 @@ class ShoppingList extends Component {
       <ListGroup className="cheese">
         <h2>Cheeses</h2>
         <Row>
-          <Col md={4}>
+          <Col md={3}>
             <h5>Purchased</h5>
           </Col>
-          <Col md={4}>
+          <Col md={3}>
             <h5>Product</h5>
           </Col>
-          <Col md={4}>
+          <Col md={3}>
             <h5>Quantity</h5>
+          </Col>
+          <Col md={3}>
+            <h5>Update Quantity</h5>
           </Col>
         </Row>
         <TransitionGroup className="shopping-list">
@@ -198,7 +194,7 @@ class ShoppingList extends Component {
             <CSSTransition key={_id} timeout={500} classNames="fade">
               <ListGroupItem className="list-text">
                 <Row>
-                  <Col md={4}>
+                  <Col md={3}>
                     <Button
                       className="remove-btn"
                       color="danger"
@@ -208,8 +204,18 @@ class ShoppingList extends Component {
                       &times;
                     </Button>
                   </Col>
-                  <Col md={4}>{name}</Col>
-                  <Col md={4}>{quantity}</Col>
+                  <Col md={3}>{name}</Col>
+                  <Col md={3}>{quantity}</Col>
+                  <Col md={3}>
+                    <Button
+                      className="update-btn"
+                      color="info"
+                      size="sm"
+                      onClick={this.onUpdateClick.bind(this, _id)}
+                    >
+                      Update
+                    </Button>
+                  </Col>
                 </Row>
               </ListGroupItem>
             </CSSTransition>
@@ -222,14 +228,17 @@ class ShoppingList extends Component {
       <ListGroup className="meat">
         <h2>Meats</h2>
         <Row>
-          <Col md={4}>
+          <Col md={3}>
             <h5>Purchased</h5>
           </Col>
-          <Col md={4}>
+          <Col md={3}>
             <h5>Product</h5>
           </Col>
-          <Col md={4}>
+          <Col md={3}>
             <h5>Quantity</h5>
+          </Col>
+          <Col md={3}>
+            <h5>Update Quantity</h5>
           </Col>
         </Row>
         <TransitionGroup className="shopping-list">
@@ -237,7 +246,7 @@ class ShoppingList extends Component {
             <CSSTransition key={_id} timeout={500} classNames="fade">
               <ListGroupItem className="list-text">
                 <Row>
-                  <Col md={4}>
+                  <Col md={3}>
                     <Button
                       className="remove-btn"
                       color="danger"
@@ -247,8 +256,18 @@ class ShoppingList extends Component {
                       &times;
                     </Button>
                   </Col>
-                  <Col md={4}>{name}</Col>
-                  <Col md={4}>{quantity}</Col>
+                  <Col md={3}>{name}</Col>
+                  <Col md={3}>{quantity}</Col>
+                  <Col md={3}>
+                    <Button
+                      className="update-btn"
+                      color="info"
+                      size="sm"
+                      onClick={this.onUpdateClick.bind(this, _id)}
+                    >
+                      Update
+                    </Button>
+                  </Col>
                 </Row>
               </ListGroupItem>
             </CSSTransition>
@@ -261,14 +280,17 @@ class ShoppingList extends Component {
       <ListGroup className="bread">
         <h2>Breads</h2>
         <Row>
-          <Col md={4}>
+          <Col md={3}>
             <h5>Purchased</h5>
           </Col>
-          <Col md={4}>
+          <Col md={3}>
             <h5>Product</h5>
           </Col>
-          <Col md={4}>
+          <Col md={3}>
             <h5>Quantity</h5>
+          </Col>
+          <Col md={3}>
+            <h5>Update Quantity</h5>
           </Col>
         </Row>
         <TransitionGroup className="shopping-list">
@@ -276,7 +298,7 @@ class ShoppingList extends Component {
             <CSSTransition key={_id} timeout={500} classNames="fade">
               <ListGroupItem className="list-text">
                 <Row>
-                  <Col md={4}>
+                  <Col md={3}>
                     <Button
                       className="remove-btn"
                       color="danger"
@@ -286,8 +308,18 @@ class ShoppingList extends Component {
                       &times;
                     </Button>
                   </Col>
-                  <Col md={4}>{name}</Col>
-                  <Col md={4}>{quantity}</Col>
+                  <Col md={3}>{name}</Col>
+                  <Col md={3}>{quantity}</Col>
+                  <Col md={3}>
+                    <Button
+                      className="update-btn"
+                      color="info"
+                      size="sm"
+                      onClick={this.onUpdateClick.bind(this, _id)}
+                    >
+                      Update
+                    </Button>
+                  </Col>
                 </Row>
               </ListGroupItem>
             </CSSTransition>
@@ -300,14 +332,17 @@ class ShoppingList extends Component {
       <ListGroup className="snack">
         <h2>Chips/Snacks</h2>
         <Row>
-          <Col md={4}>
+          <Col md={3}>
             <h5>Purchased</h5>
           </Col>
-          <Col md={4}>
+          <Col md={3}>
             <h5>Product</h5>
           </Col>
-          <Col md={4}>
+          <Col md={3}>
             <h5>Quantity</h5>
+          </Col>
+          <Col md={3}>
+            <h5>Update Quantity</h5>
           </Col>
         </Row>
         <TransitionGroup className="shopping-list">
@@ -315,7 +350,7 @@ class ShoppingList extends Component {
             <CSSTransition key={_id} timeout={500} classNames="fade">
               <ListGroupItem className="list-text">
                 <Row>
-                  <Col md={4}>
+                  <Col md={3}>
                     <Button
                       className="remove-btn"
                       color="danger"
@@ -325,8 +360,18 @@ class ShoppingList extends Component {
                       &times;
                     </Button>
                   </Col>
-                  <Col md={4}>{name}</Col>
-                  <Col md={4}>{quantity}</Col>
+                  <Col md={3}>{name}</Col>
+                  <Col md={3}>{quantity}</Col>
+                  <Col md={3}>
+                    <Button
+                      className="update-btn"
+                      color="info"
+                      size="sm"
+                      onClick={this.onUpdateClick.bind(this, _id)}
+                    >
+                      Update
+                    </Button>
+                  </Col>
                 </Row>
               </ListGroupItem>
             </CSSTransition>
@@ -339,14 +384,17 @@ class ShoppingList extends Component {
       <ListGroup className="drink">
         <h2>Drinks</h2>
         <Row>
-          <Col md={4}>
+          <Col md={3}>
             <h5>Purchased</h5>
           </Col>
-          <Col md={4}>
+          <Col md={3}>
             <h5>Product</h5>
           </Col>
-          <Col md={4}>
+          <Col md={3}>
             <h5>Quantity</h5>
+          </Col>
+          <Col md={3}>
+            <h5>Update Quantity</h5>
           </Col>
         </Row>
         <TransitionGroup className="shopping-list">
@@ -354,7 +402,7 @@ class ShoppingList extends Component {
             <CSSTransition key={_id} timeout={500} classNames="fade">
               <ListGroupItem className="list-text">
                 <Row>
-                  <Col md={4}>
+                  <Col md={3}>
                     <Button
                       className="remove-btn"
                       color="danger"
@@ -364,8 +412,18 @@ class ShoppingList extends Component {
                       &times;
                     </Button>
                   </Col>
-                  <Col md={4}>{name}</Col>
-                  <Col md={4}>{quantity}</Col>
+                  <Col md={3}>{name}</Col>
+                  <Col md={3}>{quantity}</Col>
+                  <Col md={3}>
+                    <Button
+                      className="update-btn"
+                      color="info"
+                      size="sm"
+                      onClick={this.onUpdateClick.bind(this, _id)}
+                    >
+                      Update
+                    </Button>
+                  </Col>
                 </Row>
               </ListGroupItem>
             </CSSTransition>
@@ -378,14 +436,17 @@ class ShoppingList extends Component {
       <ListGroup className="misc">
         <h2>Misc</h2>
         <Row>
-          <Col md={4}>
+          <Col md={3}>
             <h5>Purchased</h5>
           </Col>
-          <Col md={4}>
+          <Col md={3}>
             <h5>Product</h5>
           </Col>
-          <Col md={4}>
+          <Col md={3}>
             <h5>Quantity</h5>
+          </Col>
+          <Col md={3}>
+            <h5>Update Quantity</h5>
           </Col>
         </Row>
         <TransitionGroup className="shopping-list">
@@ -393,7 +454,7 @@ class ShoppingList extends Component {
             <CSSTransition key={_id} timeout={500} classNames="fade">
               <ListGroupItem className="list-text">
                 <Row>
-                  <Col md={4}>
+                  <Col md={3}>
                     <Button
                       className="remove-btn"
                       color="danger"
@@ -403,8 +464,18 @@ class ShoppingList extends Component {
                       &times;
                     </Button>
                   </Col>
-                  <Col md={4}>{name}</Col>
-                  <Col md={4}>{quantity}</Col>
+                  <Col md={3}>{name}</Col>
+                  <Col md={3}>{quantity}</Col>
+                  <Col md={3}>
+                    <Button
+                      className="update-btn"
+                      color="info"
+                      size="sm"
+                      onClick={this.onUpdateClick.bind(this, _id)}
+                    >
+                      Update
+                    </Button>
+                  </Col>
                 </Row>
               </ListGroupItem>
             </CSSTransition>
@@ -417,14 +488,17 @@ class ShoppingList extends Component {
       <ListGroup className="supplies">
         <h2>Supplies</h2>
         <Row>
-          <Col md={4}>
+          <Col md={3}>
             <h5>Purchased</h5>
           </Col>
-          <Col md={4}>
+          <Col md={3}>
             <h5>Product</h5>
           </Col>
-          <Col md={4}>
+          <Col md={3}>
             <h5>Quantity</h5>
+          </Col>
+          <Col md={3}>
+            <h5>Update Quantity</h5>
           </Col>
         </Row>
         <TransitionGroup className="shopping-list">
@@ -432,7 +506,7 @@ class ShoppingList extends Component {
             <CSSTransition key={_id} timeout={500} classNames="fade">
               <ListGroupItem className="list-text">
                 <Row>
-                  <Col md={4}>
+                  <Col md={3}>
                     <Button
                       className="remove-btn"
                       color="danger"
@@ -442,8 +516,18 @@ class ShoppingList extends Component {
                       &times;
                     </Button>
                   </Col>
-                  <Col md={4}>{name}</Col>
-                  <Col md={4}>{quantity}</Col>
+                  <Col md={3}>{name}</Col>
+                  <Col md={3}>{quantity}</Col>
+                  <Col md={3}>
+                    <Button
+                      className="update-btn"
+                      color="info"
+                      size="sm"
+                      onClick={this.onUpdateClick.bind(this, _id)}
+                    >
+                      Update
+                    </Button>
+                  </Col>
                 </Row>
               </ListGroupItem>
             </CSSTransition>
@@ -456,14 +540,17 @@ class ShoppingList extends Component {
       <ListGroup className="dairy">
         <h2>Dairy</h2>
         <Row>
-          <Col md={4}>
+          <Col md={3}>
             <h5>Purchased</h5>
           </Col>
-          <Col md={4}>
+          <Col md={3}>
             <h5>Product</h5>
           </Col>
-          <Col md={4}>
+          <Col md={3}>
             <h5>Quantity</h5>
+          </Col>
+          <Col md={3}>
+            <h5>Update Quantity</h5>
           </Col>
         </Row>
         <TransitionGroup className="shopping-list">
@@ -471,7 +558,7 @@ class ShoppingList extends Component {
             <CSSTransition key={_id} timeout={500} classNames="fade">
               <ListGroupItem className="list-text">
                 <Row>
-                  <Col md={4}>
+                  <Col md={3}>
                     <Button
                       className="remove-btn"
                       color="danger"
@@ -481,8 +568,18 @@ class ShoppingList extends Component {
                       &times;
                     </Button>
                   </Col>
-                  <Col md={4}>{name}</Col>
-                  <Col md={4}>{quantity}</Col>
+                  <Col md={3}>{name}</Col>
+                  <Col md={3}>{quantity}</Col>
+                  <Col md={3}>
+                    <Button
+                      className="update-btn"
+                      color="info"
+                      size="sm"
+                      onClick={this.onUpdateClick.bind(this, _id)}
+                    >
+                      Update
+                    </Button>
+                  </Col>
                 </Row>
               </ListGroupItem>
             </CSSTransition>
@@ -495,14 +592,17 @@ class ShoppingList extends Component {
       <ListGroup className="frozen">
         <h2>Frozen</h2>
         <Row>
-          <Col md={4}>
+          <Col md={3}>
             <h5>Purchased</h5>
           </Col>
-          <Col md={4}>
+          <Col md={3}>
             <h5>Product</h5>
           </Col>
-          <Col md={4}>
+          <Col md={3}>
             <h5>Quantity</h5>
+          </Col>
+          <Col md={3}>
+            <h5>Update Quantity</h5>
           </Col>
         </Row>
         <TransitionGroup className="shopping-list">
@@ -510,7 +610,7 @@ class ShoppingList extends Component {
             <CSSTransition key={_id} timeout={500} classNames="fade">
               <ListGroupItem className="list-text">
                 <Row>
-                  <Col md={4}>
+                  <Col md={3}>
                     <Button
                       className="remove-btn"
                       color="danger"
@@ -520,8 +620,18 @@ class ShoppingList extends Component {
                       &times;
                     </Button>
                   </Col>
-                  <Col md={4}>{name}</Col>
-                  <Col md={4}>{quantity}</Col>
+                  <Col md={3}>{name}</Col>
+                  <Col md={3}>{quantity}</Col>
+                  <Col md={3}>
+                    <Button
+                      className="update-btn"
+                      color="info"
+                      size="sm"
+                      onClick={this.onUpdateClick.bind(this, _id)}
+                    >
+                      Update
+                    </Button>
+                  </Col>
                 </Row>
               </ListGroupItem>
             </CSSTransition>
@@ -544,38 +654,31 @@ class ShoppingList extends Component {
         {frozen.length === 0 ? "" : frozenLink}
 
         <div>
-                {/* <Button onClick={this.toggle} className="navigation" href="#">
-                    Update
-                </Button> */}
-
-                <Modal
-                    isOpen={this.state.modal}
-                    toggle={this.toggle}
-                >
-                    <ModalHeader toggle={this.toggle}>Add to Shopping List</ModalHeader>
-                    <ModalBody>
-                        <Form onSubmit={this.onSubmit}>
-                                <FormGroup row>
-                                    <Label for="quantityText" sm={2}>New Quantity</Label>
-                                    <Col sm={10}>
-                                        <Input type="textarea" name="quantity" id="quantityText" onChange={this.onChange} />
-                                    </Col>
-                                </FormGroup>
-                            <Button
-                                    color="dark"
-                                    style={{marginTop: '2rem'}}
-                                    block
-                            >
-                                Update Quantity
-                            </Button>
-                        </Form>
-                    </ModalBody>
-                </Modal>
-            </div>
+          <Modal isOpen={this.state.modal} toggle={this.toggle}>
+            <ModalHeader toggle={this.toggle}>Update Item Quantity</ModalHeader>
+            <ModalBody>
+              <Form onSubmit={this.onSubmit}>
+                <FormGroup row>
+                  <Label for="quantityText" sm={2}>
+                    New Quantity
+                  </Label>
+                  <Col sm={10}>
+                    <Input
+                      type="textarea"
+                      name="quantity"
+                      id="quantityText"
+                      onChange={this.onChange}
+                    />
+                  </Col>
+                </FormGroup>
+                <Button color="dark" style={{ marginTop: "2rem" }} block>
+                  Update Quantity
+                </Button>
+              </Form>
+            </ModalBody>
+          </Modal>
+        </div>
       </Container>
-
-      
-
     );
   }
 }
@@ -585,4 +688,6 @@ const mapStateToProps = (state) => ({
   auth: state.auth,
 });
 
-export default connect(mapStateToProps, { getItems, updateItem, deleteItem })(ShoppingList);
+export default connect(mapStateToProps, { getItems, updateItem, deleteItem })(
+  ShoppingList
+);
