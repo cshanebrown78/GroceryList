@@ -76,10 +76,17 @@ class LoginModal extends Component {
         this.props.login(user)
 
         // Redirects to the shopping list page after 5 seconds
-        setTimeout(function(){
-            window.location.href = '/shoppinglist';
-         }, 5000);
+        // setTimeout(function(){
+        //     window.location.href = '/shoppinglist';
+        //     }, 5000)
+
+                
+                    
+                  
+                
     };
+
+    
 
     render() {
         return(
