@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const port = process.env.PORT || 3001;
 const path = require('path');
-const config = require('config');
+// const config = require('config');
 
 // const items = require('./routes/api/items')
 
