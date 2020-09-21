@@ -16,7 +16,7 @@ app.use(express.json());
 const db = config.get('mongoURI')
 
 // Connect to the Mongo
-mongoose.connect(process.env.MONGODB_URI || db)
+mongoose.connect(process.env.MONGODB_URI || "mongodb+srv://cshanebrown78:A!rplane1@cluster0-vggoa.mongodb.net/groceryList?retryWrites=true&w=majority")
     .then(() => console.log('MongoDB Connected...'))
     .catch(err => console.log(err));
 
