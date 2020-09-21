@@ -13,7 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // DB Config
-const db = config.get('mongoURI')
+// const db = config.get('mongoURI')
 
 // Connect to the Mongo
 mongoose.connect(process.env.MONGODB_URI || "mongodb+srv://cshanebrown78:A!rplane1@cluster0-vggoa.mongodb.net/groceryList?retryWrites=true&w=majority")
