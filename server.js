@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const port = process.env.PORT || 3001;
 const path = require('path');
-// const config = require('config');
+const config = require('config');
 
 // const items = require('./routes/api/items')
 
@@ -13,10 +13,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // DB Config
-// const db = config.get('mongoURI')
+const db = config.get('mongoURI')
 
 // Connect to the Mongo
-mongoose.connect(process.env.MONGODB_URI || "mongodb+srv://cshanebrown78:A!rplane1@cluster0-vggoa.mongodb.net/groceryList?retryWrites=true&w=majority")
+mongoose.connect(process.env.MONGODB_URI || db)
     .then(() => console.log('MongoDB Connected...'))
     .catch(err => console.log(err));
 
@@ -34,7 +34,8 @@ if(process.env.NODE_ENV === 'production') {
     app.use(express.static('client/build'));
 
     app.get('*', (req, res) => {
-        res.sendFile(path.resolve(__dirname,'./client/build/index.html'));
+        // res.sendFile(path.resolve(__dirname,'./client/build/index.html'));
+        res.sendFile(path.resolve(__dirname,  "build", "index.html"));
     })
 }
 
