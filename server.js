@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const port = process.env.PORT || 3001;
 const path = require('path');
-const config = require('config');
+// const config = require('config');
 
 // const items = require('./routes/api/items')
 
@@ -13,16 +13,16 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // DB Config
-const db = config.get('mongoURI')
+// const db = config.get('mongoURI')
 
 // Connect to the Mongo
-mongoose.connect(process.env.MONGODB_URI || db)
-    .then(() => console.log('MongoDB Connected...'))
-    .catch(err => console.log(err));
-
-// mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/GroceryList")
+// mongoose.connect(process.env.MONGODB_URI || db)
 //     .then(() => console.log('MongoDB Connected...'))
 //     .catch(err => console.log(err));
+
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/GroceryList")
+    .then(() => console.log('MongoDB Connected...'))
+    .catch(err => console.log(err));
 
 //Use Routes
 app.use('/api/items', require('./routes/api/items'));
