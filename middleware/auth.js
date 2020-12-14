@@ -1,4 +1,6 @@
+// ***Pre Heroku Upload Testing***
 // const config = require('config');
+
 const jwt = require('jsonwebtoken')
 const jwtSecret = process.env.jwtSecret
 
@@ -11,7 +13,10 @@ function auth (req, res, next) {
 
     try {
         //Verify token
+
+        // ***Pre Heroku Upload Testing***
         // const decoded = jwt.verify(token, config.get('jwtSecret'));
+        
         const decoded = jwt.verify(token, jwtSecret);
         // Add user from payload
         req.user = decoded;

@@ -30,7 +30,6 @@ class RepeatableList extends Component {
   };
 
   onAddClick = (name, department, quantity) => {
-    //   console.log("name = " + name)
       const { user } = this.props.auth;
 
       const repeatItem = {
@@ -40,7 +39,6 @@ class RepeatableList extends Component {
           uName: user.userName
       }
 
-      console.log("repeatItem = " + JSON.stringify(repeatItem))
       this.props.addItem(repeatItem);
   }
 
@@ -50,7 +48,6 @@ class RepeatableList extends Component {
 
     let current = "";
 
-    // console.log("userName - " + current)
     if (user) {
       current = user.userName;
     } else {
@@ -59,8 +56,6 @@ class RepeatableList extends Component {
 
     const userRepeats = repeats.filter((repeat) => repeat.uName === current);
 
-    // console.log("Items " + JSON.stringify(items));
-    // console.log("Items work " + items.item.department[Produce]);
     const produce = userRepeats.filter((repeat) => repeat.department === "Produce");
     const cheeses = userRepeats.filter((repeat) => repeat.department === "Cheeses");
     const meats = userRepeats.filter((repeat) => repeat.department === "Meats");

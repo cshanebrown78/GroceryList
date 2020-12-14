@@ -53,7 +53,6 @@ class BasicList extends Component {
                         </Col>
                     </Row>
                     <TransitionGroup className="shopping-list">
-                        {/* {items.map(({ _id, name, department, quantity, repeat }) => ( */}
                         {userItems.map(({ _id, name, department, quantity, repeat }) => (        
                             <CSSTransition key={_id} timeout={500} classNames="fade">
                                 <ListGroupItem className="list-text">

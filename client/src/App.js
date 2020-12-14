@@ -40,24 +40,4 @@ class App extends Component {
   }
 }
 
-
-// class App extends Component {
-//   render() {
-//     return (
-//       <Provider store={store}>
-//         <div className="App">
-//           <AppNavbar />
-//           <Container>
-//             {/* <ItemModal /> */}
-//             <ShoppingList />
-//           </Container>
-          
-//         </div>
-//       </Provider>
-      
-//     )
-//   }  
-//     ;
-// }
-
 export default App;

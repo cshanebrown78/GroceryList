@@ -2,9 +2,9 @@ const express = require('express');
 const mongoose = require('mongoose');
 const port = process.env.PORT || 3001;
 const path = require('path');
-// const config = require('config');
 
-// const items = require('./routes/api/items')
+// ***Pre Heroku Upload Testing***
+// const config = require('config');
 
 const app = express();
 
@@ -12,6 +12,7 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+// ***Pre Heroku Upload Testing***
 // DB Config
 // const db = config.get('mongoURI')
 
@@ -36,7 +37,6 @@ if(process.env.NODE_ENV === 'production') {
     app.use(express.static('client/build'));
 
     app.get('*', (req, res) => {
-        // res.sendFile(path.resolve(__dirname,'./client/build/index.html'));
         res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
     })
 }

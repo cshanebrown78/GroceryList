@@ -62,7 +62,6 @@ class AppNavbar extends Component {
 
         return (
             <div>
-                {/* <Navbar color="dark" dark expand="sm" className="mb-5" fixed="top"> */}
                 <Navbar className="mb-5 navigation" expand='sm' fixed="top">    
                     <Container>
                         <NavbarBrand className="navigation" href="/">GroceryList</NavbarBrand>

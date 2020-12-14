@@ -1,10 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
+
+// ***Pre Heroku Upload Testing***
 // const config = require('config');
+
 const jwt = require('jsonwebtoken');
 const auth = require('../../middleware/auth');
-const jwtSecret = process.env.jwtSecret
+const jwtSecret = process.env.jwtSecret;
 
 // User Model
 const User = require('../../models/User');
@@ -34,7 +37,10 @@ router.post('/', (req, res) => {
 
                     jwt.sign(
                         { id: user.id },
+
+                        // ***Pre Heroku Upload Testing***
                         // config.get('jwtSecret'),
+                        
                         jwtSecret,
                         { expiresIn: 7200 },
                         (err, token) => {

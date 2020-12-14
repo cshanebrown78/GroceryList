@@ -15,10 +15,8 @@ import {
   ModalBody,
 } from "reactstrap";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
-// import uuid from 'react-uuid';
 import { connect } from "react-redux";
 import { getItems, deleteItem, updateItem } from "../actions/itemActions";
-// import UpdateModal from "../components/UpdateModal";
 import PropTypes from "prop-types";
 
 class ShoppingList extends Component {
@@ -82,7 +80,6 @@ class ShoppingList extends Component {
 
     this.toggle();
 
-    // console.log("id = " + id)
   };
 
   render() {
@@ -91,7 +88,6 @@ class ShoppingList extends Component {
 
     let current = "";
 
-    // console.log("userName - " + current)
     if (user) {
       current = user.userName;
     } else {
@@ -100,8 +96,6 @@ class ShoppingList extends Component {
 
     const userItems = items.filter((item) => item.uName === current);
 
-    // console.log("Items " + JSON.stringify(items));
-    // console.log("Items work " + items.item.department[Produce]);
     const produce = userItems.filter((item) => item.department === "Produce");
     const cheeses = userItems.filter((item) => item.department === "Cheeses");
     const meats = userItems.filter((item) => item.department === "Meats");
@@ -137,7 +131,6 @@ class ShoppingList extends Component {
           </Col>
         </Row>
         <TransitionGroup className="shopping-list">
-          {/* {items.map(({ _id, name, department, quantity, repeat }) => ( */}
           {produce.map(({ _id, name, department, quantity, repeat }) => (
             <CSSTransition key={_id} timeout={500} classNames="fade">
               <ListGroupItem className="list-text">

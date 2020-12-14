@@ -9,7 +9,6 @@ import {
     Label,
     Input,
     Col,
-    NavLink
  } from 'reactstrap';
 import { connect } from 'react-redux';
 import { addItem, updateItem, getItems } from '../actions/itemActions';
@@ -48,11 +47,9 @@ class UpdateModal extends Component {
         e.preventDefault();
 
         const { user } = this.props.auth;
-        // console.log("this - " + user.userName)
 
         const updatedQty = {
             quantity: this.state.quantity,
-            // uName: user.userName
         }
 
         console.log('Quantity - ' + updatedQty.quantity);
